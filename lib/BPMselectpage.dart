@@ -15,7 +15,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BPMを選んでね　新しく登録もできるよ"),
+        title: Text("BPMを選んでね 新規計測もできるよ"),
       ),
       body: Center(
         child: Column(
