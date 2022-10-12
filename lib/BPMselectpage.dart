@@ -27,16 +27,16 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
               setState(() {
                 BPM = previous_BPM - 10;
                 previous_BPM -= 10;
-                playlist = musicselect(artist: artist,BPM: BPM);
               });
+              playlist = musicselect(artist: artist,BPM: BPM);
             }, child: Text("前回より遅め(${previous_BPM - 10})")
             ),
             TextButton(onPressed: (){
               Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
               setState(() {
                 BPM = previous_BPM;
-                playlist = musicselect(artist:artist,BPM:BPM);
               });
+              playlist = musicselect(artist:artist,BPM:BPM);
             }, child: Text("前回(${previous_BPM})")
             ),
             TextButton(onPressed: (){
@@ -44,8 +44,8 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
               setState(() {
                 BPM = previous_BPM + 10;
                 previous_BPM += 10;
-                playlist = musicselect(artist: artist, BPM: BPM);
               });
+              playlist = musicselect(artist: artist, BPM: BPM);
             }, child: Text("前回より早め(${previous_BPM + 10})")
             ),
             TextButton(onPressed: (){

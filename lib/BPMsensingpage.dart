@@ -43,8 +43,8 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
               Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
               setState(() {
                 previous_BPM = BPM;
-                playlist = musicselect(artist: artist,BPM: BPM);
               });
+              playlist = musicselect(artist: artist,BPM: BPM);
             }, child: Text("計測終了")
             ),
           ],
