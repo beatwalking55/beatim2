@@ -82,7 +82,7 @@ Map musics = {
     'BPM': 128
   },
   17: {
-    'name': "BLACKPINK - 마지막처럼 (AS IF ITS YOUR LAST)BPM125",
+    'name': "BLACKPINK - (AS IF ITS YOUR LAST)BPM125",
     'filename':
     "audio/BLACKPINK - 마지막처럼 (AS IF ITS YOUR LAST)BPM125.mp3",
     'BPM': 125

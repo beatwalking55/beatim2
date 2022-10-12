@@ -1,3 +1,4 @@
+import 'package:beatim/BPMsensingpage.dart';
 import 'package:beatim/variables.dart';
 import 'package:flutter/material.dart';
 import 'musicdata.dart';
@@ -23,28 +24,37 @@ class _PlayPageState extends State<PlayPage> {
             Text("ジャンル：${genre}"),
             Text("アーティスト：${artist}"),
             Text("BPM：${BPM}"),
-            ListView.builder( //ここエラー出ます
-              itemCount: musics.length,
-              itemBuilder: (BuildContext context, int index){
-                return Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Row(
-                    children: [
-                      IconButton(
-                          icon: const Icon(Icons.play_arrow),
-                          onPressed: () {
-                            setState(() {
-                              //music = musics[index]['filename'];
-                              //ORIGINAL_BPM = musics[index]['BPM'];
-                            });
-                            //_loadAudioFile();
-                            //_playSoundFile();
-                          }),
-                      Text(musics[index]['name']),
-                    ],
-                  ),
-                );
-              }
+            Flexible(
+              child: ListView.builder(
+                itemCount: musics.length,
+                itemBuilder: (BuildContext context, int index){
+                  return Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      children: [
+                        IconButton(
+                            icon: const Icon(Icons.play_arrow),
+                            onPressed: () {
+                              setState(() {
+                                //music = musics[index]['filename'];
+                                //ORIGINAL_BPM = musics[index]['BPM'];
+                              });
+                              //_loadAudioFile();
+                              //_playSoundFile();
+                            }),
+                        Text(musics[index]['name']),
+                      ],
+                    ),
+                  );
+                }
+              ),
+            ),
+            TextButton(onPressed: (){
+              Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSensingPage()));
+              setState(() {
+                previous_BPM = BPM;
+              });
+            }, child: Text("再計測")
             ),
           ],
         ),
