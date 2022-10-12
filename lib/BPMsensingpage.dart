@@ -1,3 +1,4 @@
+import 'package:beatim/musicselectfunction.dart';
 import 'package:beatim/playpage.dart';
 import 'package:flutter/material.dart';
 import 'variables.dart';
@@ -42,6 +43,7 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
               Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
               setState(() {
                 previous_BPM = BPM;
+                playlist = musicselect(artist: artist,BPM: BPM);
               });
             }, child: Text("計測終了")
             ),

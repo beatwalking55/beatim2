@@ -1,4 +1,5 @@
 import 'package:beatim/BPMsensingpage.dart';
+import 'package:beatim/musicselectfunction.dart';
 import 'package:beatim/playpage.dart';
 import 'package:flutter/material.dart';
 import 'variables.dart';
@@ -26,6 +27,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
               setState(() {
                 BPM = previous_BPM - 10;
                 previous_BPM -= 10;
+                playlist = musicselect(artist: artist,BPM: BPM);
               });
             }, child: Text("前回より遅め(${previous_BPM - 10})")
             ),
@@ -33,6 +35,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
               Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
               setState(() {
                 BPM = previous_BPM;
+                playlist = musicselect(artist:artist,BPM:BPM);
               });
             }, child: Text("前回(${previous_BPM})")
             ),
@@ -41,6 +44,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
               setState(() {
                 BPM = previous_BPM + 10;
                 previous_BPM += 10;
+                playlist = musicselect(artist: artist, BPM: BPM);
               });
             }, child: Text("前回より早め(${previous_BPM + 10})")
             ),

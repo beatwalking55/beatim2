@@ -2,6 +2,7 @@ import 'package:beatim/BPMsensingpage.dart';
 import 'package:beatim/variables.dart';
 import 'package:flutter/material.dart';
 import 'musicdata.dart';
+import 'variables.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({Key? key}) : super(key: key);
@@ -26,7 +27,7 @@ class _PlayPageState extends State<PlayPage> {
             Text("BPM：${BPM}"),
             Flexible(
               child: ListView.builder(
-                itemCount: musics.length,
+                itemCount: playlist.length,
                 itemBuilder: (BuildContext context, int index){
                   return Padding(
                     padding: EdgeInsets.all(10),
@@ -36,13 +37,13 @@ class _PlayPageState extends State<PlayPage> {
                             icon: const Icon(Icons.play_arrow),
                             onPressed: () {
                               setState(() {
-                                //music = musics[index]['filename'];
-                                //ORIGINAL_BPM = musics[index]['BPM'];
+                                //music = musics[playlist[index]]['filename'];
+                                //ORIGINAL_BPM = musics[playlist[index]]['BPM'];
                               });
                               //_loadAudioFile();
                               //_playSoundFile();
                             }),
-                        Text(musics[index]['name']),
+                        Text(musics[playlist[index]]['name']),
                       ],
                     ),
                   );
