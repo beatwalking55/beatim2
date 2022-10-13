@@ -57,6 +57,7 @@ class _PlayPageState extends State<PlayPage> {
                                   playingmusic = index;
                                   playericon = Icons.pause;
                                   music = musics[playlist[index]]['filename'];
+                                  visible = true;
                                   //ORIGINAL_BPM = musics[playlist[index]]['BPM'];
                                 });
                                 _loadAudioFile();
@@ -80,39 +81,53 @@ class _PlayPageState extends State<PlayPage> {
                 });
               }, child: Text("再計測")
               ),
-              Row(
-                children: [
-                  Expanded(child: Text(musics[playlist[playingmusic]]['name'], overflow: TextOverflow.ellipsis,)),
-                  IconButton(onPressed:(){
-                    if(playericon == Icons.play_arrow){
-                      _playSoundFile();
-                      setState(() {
-                        playericon = Icons.pause;
-                      });
-                    }else{
-                      player.pause();
-                      setState(() {
-                        playericon = Icons.play_arrow;
-                      });
-                    }
+              Visibility(
+                visible: visible,
+                maintainSize: true,
+                maintainAnimation: true,
+                maintainState: true,
+                child: Row(
+                  children: [
+                      Expanded(child: Text(musics[playlist[playingmusic]]['name'], overflow: TextOverflow.ellipsis,)),
+                      IconButton(onPressed:(){
+                        if(playericon == Icons.play_arrow){
+                          setState(() {
+                            playericon = Icons.pause;
+                            music = musics[playlist[playingmusic]]['filename'];
 
-                  },
-                      icon: Icon(playericon)
-                  ),
-                  //ここで先送りボタンを実装したかった
-                  IconButton(
-                      onPressed: (){
-                        player.pause();
-                        setState(() {
-                          playingmusic += 1;
-                          music = musics[playlist[playingmusic]]['filename'];
-                        });
-                        _loadAudioFile();
-                        _playSoundFile();
+                          });
+                          _playSoundFile();
+                        }else{
+                          player.pause();
+                          setState(() {
+                            playericon = Icons.play_arrow;
+                          });
+                        }
+
                       },
-                      icon: Icon(Icons.fast_forward))
-                ],
-              ),
+                          icon: Icon(playericon)
+                      ),
+                      //ここで先送りボタンを実装したかった
+                      IconButton(
+                          onPressed: (){
+                            player.pause();
+                            setState(() {
+                              if(playingmusic == playlist.length-1){
+                                playingmusic = 0;
+                              }else{
+                                playingmusic += 1;
+                              }
+                              music = musics[playlist[playingmusic]]['filename'];
+                            });
+                            _loadAudioFile();
+                            if (playericon == Icons.pause){
+                              _playSoundFile();
+                            }
+                          },
+                          icon: Icon(Icons.fast_forward))
+                    ],
+                  ),
+                ),
             ],
           ),
         ),
