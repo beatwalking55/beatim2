@@ -70,9 +70,13 @@ class _PlayPageState extends State<PlayPage> {
                 }
               ),
             ),
-            TextButton(onPressed: () {
+            TextButton(onPressed: () async {
               // player.pause();
-              Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSensingPage()));
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder:(context) => BPMSensingPage()
+                  )
+              );
               setState(() {
                 previous_sensingBPM = sensingBPM;
               });
