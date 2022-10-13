@@ -1,8 +1,8 @@
 import 'package:beatim/BPMsensingpage.dart';
 import 'package:beatim/variables.dart';
 import 'package:flutter/material.dart';
-import 'musicdata.dart';
-import 'variables.dart';
+import 'package:beatim/musicdata.dart';
+import 'package:beatim/variables.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
 
@@ -34,102 +34,55 @@ class _PlayPageState extends State<PlayPage> {
       appBar: AppBar(
         title: Text("好きな曲を再生しよう"),
       ),
-      body: SafeArea(
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text("ジャンル：${genre}"),
-              Text("アーティスト：${artist}"),
-              Text("BPM：${BPM}"),
-              Flexible(
-                child: ListView.builder(
-                  itemCount: playlist.length,
-                  itemBuilder: (BuildContext context, int index){
-                    return Padding(
-                      padding: EdgeInsets.all(10),
-                      child: Row(
-                        children: [
-                          IconButton(
-                              icon: const Icon(Icons.play_arrow),
-                              onPressed: () {
-                                setState(() {
-                                  playingmusic = index;
-                                  playericon = Icons.pause;
-                                  music = musics[playlist[index]]['filename'];
-                                  visible = true;
-                                  //ORIGINAL_BPM = musics[playlist[index]]['BPM'];
-                                });
-                                _loadAudioFile();
-                                _playSoundFile();
-                              }),
-                          Expanded(
-                              child: Text(musics[playlist[index]]['name'],overflow: TextOverflow.ellipsis,),
-                          ),
-
-                        ],
-                      ),
-                    );
-                  }
-                ),
-              ),
-              TextButton(onPressed: () {
-                //player.pause();
-                Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSensingPage()));
-                setState(() {
-                  previous_BPM = BPM;
-                });
-              }, child: Text("再計測")
-              ),
-              Visibility(
-                visible: visible,
-                maintainSize: true,
-                maintainAnimation: true,
-                maintainState: true,
-                child: Row(
-                  children: [
-                      Expanded(child: Text(musics[playlist[playingmusic]]['name'], overflow: TextOverflow.ellipsis,)),
-                      IconButton(onPressed:(){
-                        if(playericon == Icons.play_arrow){
-                          setState(() {
-                            playericon = Icons.pause;
-                            music = musics[playlist[playingmusic]]['filename'];
-
-                          });
-                          _playSoundFile();
-                        }else{
-                          player.pause();
-                          setState(() {
-                            playericon = Icons.play_arrow;
-                          });
-                        }
-
-                      },
-                          icon: Icon(playericon)
-                      ),
-                      //ここで先送りボタンを実装したかった
-                      IconButton(
-                          onPressed: (){
-                            player.pause();
-                            setState(() {
-                              if(playingmusic == playlist.length-1){
-                                playingmusic = 0;
-                              }else{
-                                playingmusic += 1;
-                              }
-                              music = musics[playlist[playingmusic]]['filename'];
-                            });
-                            _loadAudioFile();
-                            if (playericon == Icons.pause){
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text("ジャンル：${genre}"),
+            Text("アーティスト：${artist}"),
+            Text("BPM：${sensingBPM}"),
+            Flexible(
+              child: ListView.builder(
+                itemCount: playlist.length,
+                itemBuilder: (BuildContext context, int index){
+                  return Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Row(
+                      children: [
+                        IconButton(
+                            icon: const Icon(Icons.play_arrow),
+                            onPressed: () {
+                              setState(() {
+                                music = musics[playlist[index]]['filename'];
+                                ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];
+                              });
+                              _loadAudioFile();
                               _playSoundFile();
-                            }
-                          },
-                          icon: Icon(Icons.fast_forward))
-                    ],
-                  ),
-                ),
-            ],
-          ),
+                            }),
+                        IconButton(
+                            icon: const Icon(Icons.pause),
+                            onPressed: () async => await player.pause(),),
+                        Text(musics[playlist[index]]['name']),
+
+                      ],
+                    ),
+                  );
+                }
+              ),
+            ),
+            TextButton(onPressed: () async {
+              // player.pause();
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder:(context) => BPMSensingPage()
+                  )
+              );
+              setState(() {
+                previous_sensingBPM = sensingBPM;
+              });
+            }, child: Text("再計測")
+            ),
+          ],
         ),
       ),
     );
@@ -138,8 +91,6 @@ class _PlayPageState extends State<PlayPage> {
 
 late AudioPlayer player;
 bool _changeAudioSource = false;
-
-
 
 
 Future<void> _setupSession() async {
@@ -164,6 +115,6 @@ Future<void> _playSoundFile() async {
     await _loadAudioFile();
   }
 
-  //await _player.setSpeed(_currentSliderValue); // 再生速度を指定
+  // await player.setSpeed(bpm_ratio); // 再生速度を指定
   await player.play();
 }
