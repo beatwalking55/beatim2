@@ -1,4 +1,5 @@
 import 'package:beatim/BPMsensingpage.dart';
+import 'package:beatim/logpage.dart';
 import 'package:beatim/variables.dart';
 import 'package:flutter/material.dart';
 import 'package:beatim/musicdata.dart';
@@ -65,7 +66,7 @@ class _PlayPageState extends State<PlayPage> {
                         //IconButton(
                         //    icon: const Icon(Icons.pause),
                         //    onPressed: () async => await player.pause(),),
-                        Text(musics[playlist[index]]['name']),
+                        Expanded(child: Text(musics[playlist[index]]['name'], overflow: TextOverflow.ellipsis,),),
 
                       ],
                     ),
@@ -131,6 +132,21 @@ class _PlayPageState extends State<PlayPage> {
                 previous_sensingBPM = sensingBPM;
               });
             }, child: Text("再計測")
+            ),
+            Visibility(
+              visible: visible,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: TextButton(onPressed: () async {
+                // player.pause();
+                await Navigator.of(context).push(
+                    MaterialPageRoute(
+                        builder:(context) => logpage()
+                    )
+                );
+              }, child: Text("評価ページへ")
+              ),
             ),
           ],
         ),
