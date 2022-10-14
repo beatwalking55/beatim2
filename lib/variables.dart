@@ -2,10 +2,18 @@ import 'package:flutter/material.dart';
 
 var genre = "J-POP";
 var artist = "ミセス";
-var BPM = 150;
-var previous_BPM = 165;
+double sensingBPM = 150;
+double previous_sensingBPM = 165;
 var playlist = [0,0,0,0,0];
 var music = "audio/Mrs. GREEN APPLE_青と夏__BPM185.mp3";
 var playericon = Icons.play_arrow;
 int playingmusic = 0;
 var visible = false;
+
+double bpm_ratio = 1.0;
+int ORIGINAL_musicBPM = 138; //goodnight:138, bgm1:152
+bool _changeAudioSource = true;
+String _stateSource = 'アセットを再生';
+int oldtime = 0;
+int newtime = 0;
+List<int> duls = [1, 1, 1, 1, 1];

@@ -53,21 +53,71 @@ class _PlayPageState extends State<PlayPage> {
                             icon: const Icon(Icons.play_arrow),
                             onPressed: () {
                               setState(() {
+                                visible = true;
+                                playingmusic = index;
+                                playericon = Icons.pause;
                                 music = musics[playlist[index]]['filename'];
                                 ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];
                               });
                               _loadAudioFile();
                               _playSoundFile();
                             }),
-                        IconButton(
-                            icon: const Icon(Icons.pause),
-                            onPressed: () async => await player.pause(),),
+                        //IconButton(
+                        //    icon: const Icon(Icons.pause),
+                        //    onPressed: () async => await player.pause(),),
                         Text(musics[playlist[index]]['name']),
 
                       ],
                     ),
                   );
                 }
+              ),
+            ),
+            Visibility(
+              visible: visible,
+              maintainSize: true,
+              maintainAnimation: true,
+              maintainState: true,
+              child: Row(
+                children: [
+                  Expanded(child: Text(musics[playlist[playingmusic]]['name'], overflow: TextOverflow.ellipsis,)),
+                  IconButton(onPressed:(){
+                    if(playericon == Icons.play_arrow){
+                      setState(() {
+                        playericon = Icons.pause;
+                        music = musics[playlist[playingmusic]]['filename'];
+
+                      });
+                      _playSoundFile();
+                    }else{
+                      player.pause();
+                      setState(() {
+                        playericon = Icons.play_arrow;
+                      });
+                    }
+
+                  },
+                      icon: Icon(playericon)
+                  ),
+                  //ここで先送りボタンを実装したかった
+                  IconButton(
+                      onPressed: (){
+                        player.pause();
+                        setState(() {
+                          if(playingmusic == playlist.length-1){
+                            playingmusic = 0;
+                          }else{
+                            playingmusic += 1;
+                          }
+                          music = musics[playlist[playingmusic]]['filename'];
+                        });
+                        _loadAudioFile();
+                        if (playericon == Icons.pause){
+                          _playSoundFile();
+                        }
+                      },
+                      icon: Icon(Icons.fast_forward))
+                ],
               ),
             ),
             TextButton(onPressed: () async {

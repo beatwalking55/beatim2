@@ -25,28 +25,28 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
             TextButton(onPressed: (){
               Navigator.push(context,MaterialPageRoute(builder:(context) =>(PlayPage())));
               setState(() {
-                BPM = previous_BPM - 10;
-                previous_BPM -= 10;
+                sensingBPM = previous_sensingBPM - 10;
+                previous_sensingBPM -= 10;
               });
-              playlist = musicselect(artist: artist,BPM: BPM);
-            }, child: Text("前回より遅め(${previous_BPM - 10})")
+              playlist = musicselect(artist: artist,BPM: sensingBPM);
+            }, child: Text("前回より遅め(${previous_sensingBPM - 10})")
             ),
             TextButton(onPressed: (){
               Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
               setState(() {
-                BPM = previous_BPM;
+                sensingBPM = previous_sensingBPM;
               });
-              playlist = musicselect(artist:artist,BPM:BPM);
-            }, child: Text("前回(${previous_BPM})")
+              playlist = musicselect(artist:artist,BPM:sensingBPM);
+            }, child: Text("前回(${previous_sensingBPM})")
             ),
             TextButton(onPressed: (){
               Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
               setState(() {
-                BPM = previous_BPM + 10;
-                previous_BPM += 10;
+                sensingBPM = previous_sensingBPM + 10;
+                previous_sensingBPM += 10;
               });
-              playlist = musicselect(artist: artist, BPM: BPM);
-            }, child: Text("前回より早め(${previous_BPM + 10})")
+              playlist = musicselect(artist: artist, BPM: sensingBPM);
+            }, child: Text("前回より早め(${previous_sensingBPM + 10})")
             ),
             TextButton(onPressed: (){
               Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSensingPage()));
