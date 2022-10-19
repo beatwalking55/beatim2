@@ -59,6 +59,10 @@ class _PlayPageState extends State<PlayPage> {
                                 playericon = Icons.pause;
                                 music = musics[playlist[index]]['filename'];
                                 ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];
+                                bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
+                                player.setSpeed(bpm_ratio);
+                                changingspeed = true;
+                                changingspeedbutton = "原曲";
                               });
                               _loadAudioFile();
                               _playSoundFile();
@@ -82,6 +86,19 @@ class _PlayPageState extends State<PlayPage> {
               child: Row(
                 children: [
                   Expanded(child: Text(musics[playlist[playingmusic]]['name'], overflow: TextOverflow.ellipsis,)),
+                  TextButton(
+                      onPressed:(){ setState(() {
+                        if(changingspeed == true){
+                          changingspeed = false;
+                          player.setSpeed(1.0);
+                          changingspeedbutton = "走速";
+                        }else{
+                          changingspeed = true;
+                          player.setSpeed(bpm_ratio);
+                          changingspeedbutton = "原曲";
+                        }
+                      });},
+                      child: Text(changingspeedbutton)),
                   IconButton(onPressed:(){
                     if(playericon == Icons.play_arrow){
                       setState(() {
