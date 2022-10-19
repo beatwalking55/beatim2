@@ -9,6 +9,8 @@ var music = "audio/Mrs. GREEN APPLE_青と夏__BPM185.mp3";
 var playericon = Icons.play_arrow;
 int playingmusic = 0;
 var visible = false;
+var changingspeed = true;
+var changingspeedbutton = "原曲";
 
 double bpm_ratio = 1.0;
 int ORIGINAL_musicBPM = 138; //goodnight:138, bgm1:152

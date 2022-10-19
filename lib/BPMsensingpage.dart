@@ -68,6 +68,8 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                   Navigator.pop(context);
                   setState(() {
                     player.setSpeed(bpm_ratio);
+                    changingspeed = true;
+                    changingspeedbutton = "原曲";
                     previous_sensingBPM = sensingBPM;
                     playlist = musicselect(artist: artist, BPM: sensingBPM);
                   });
