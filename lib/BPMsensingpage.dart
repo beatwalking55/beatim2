@@ -17,24 +17,12 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
       appBar: AppBar(
         title: Text("BPMを計測しよう"),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            ElevatedButton(
-              child: const Text('Tap!'),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.white,
-                onPrimary: Colors.black,
-                shape: const CircleBorder(
-                  side: BorderSide(
-                    color: Colors.black,
-                    width: 1,
-                    style: BorderStyle.solid,
-                  ),
-                ),
-              ),
-              onPressed: () {
+      body:         Container(
+        width:  double.infinity,
+        height:  double.infinity,
+      child: GestureDetector(
+        behavior: HitTestBehavior.opaque,
+              onTap: () {
                 oldtime = newtime;
                 newtime = DateTime.now().millisecondsSinceEpoch; //millisecond
                 duls[4] = duls[3];
@@ -49,8 +37,32 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                 bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
                 print(bpm_ratio);
               },
-            ),
-            Text("BPM:${sensingBPM}"),
+          
+
+            //ElevatedButton(
+              //child: const Text('Tap!'),
+              //style: ElevatedButton.styleFrom(
+                //primary: Colors.white,
+                //onPrimary: Colors.black,
+                //shape: const CircleBorder(
+                  //side: BorderSide(
+                    //color: Colors.black,
+                    //width: 1,
+                    //style: BorderStyle.solid,
+                  //),
+                //),
+              //),
+
+
+        child: Stack(
+          alignment: Alignment.center,
+
+
+          children:<Widget>[ 
+      Positioned(
+        top: 300.0,
+            child: Text("BPM:${sensingBPM}"),
+          ),  
             TextButton(
                 onPressed: () {
                   Navigator.pop(context);
@@ -60,9 +72,12 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                     playlist = musicselect(artist: artist, BPM: sensingBPM);
                   });
                 },
-                child: Text("計測終了")),
-          ],
-        ),
+                child: Text("計測終了")
+                ),
+              
+            ],
+          ),  
+      ),
       ),
     );
   }

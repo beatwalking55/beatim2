@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:beatim/BPMsensingpage.dart';
 import 'package:beatim/variables.dart';
 import 'package:flutter/material.dart';
@@ -45,13 +47,18 @@ class _PlayPageState extends State<PlayPage> {
               child: ListView.builder(
                 itemCount: playlist.length,
                 itemBuilder: (BuildContext context, int index){
-                  return Padding(
-                    padding: EdgeInsets.all(10),
-                    child: Row(
-                      children: [
-                        IconButton(
-                            icon: const Icon(Icons.play_arrow),
-                            onPressed: () {
+                  return Container(
+                    //padding: EdgeInsets.all(10),
+                    alignment:Alignment.centerLeft,
+
+                    child: Container(
+                      width:double.infinity,
+                     child:ElevatedButton.icon(
+                    icon: Icon(Icons.play_arrow),
+
+  label: Text(musics[playlist[index]]['name']),
+  onPressed: () {
+    
                               setState(() {
                                 visible = true;
                                 playingmusic = index;
@@ -61,17 +68,41 @@ class _PlayPageState extends State<PlayPage> {
                               });
                               _loadAudioFile();
                               _playSoundFile();
-                            }),
+                            },
+),
+                    
+                     
+                    //padding: EdgeInsets.all(10),
+                    //child: Row(
+                      //children: [
                         //IconButton(
-                        //    icon: const Icon(Icons.pause),
-                        //    onPressed: () async => await player.pause(),),
-                        Text(musics[playlist[index]]['name']),
+                            //icon: const Icon(Icons.play_arrow),
+                           // child:GestureDetector(
+                         // child:Row(
+                        //  children:[
+                       // Icon(Icons.play_arrow),
+                      //  Text(musics[playlist[index]]['name']),
+                      //    ],
+                      //  ),
+                           // onTap: () {
+                             // setState(() {
+                             //   visible = true;
+                             //   playingmusic = index;
+                             //   playericon = Icons.pause;
+                             //   music = musics[playlist[index]]['filename'];
+                             //   ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];
+                            //  });
+                           //   _loadAudioFile();
+                          //    _playSoundFile();
+                          //  },
 
-                      ],
-                    ),
+                      //],
+                   // ),
+                  ),
                   );
-                }
-              ),
+                },
+//separatorBuilder: (context, index) => Divider(height: .0),              】
+),
             ),
             Visibility(
               visible: visible,
