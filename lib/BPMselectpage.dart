@@ -28,7 +28,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                 sensingBPM = previous_sensingBPM - 10;
                 previous_sensingBPM -= 10;
               });
-              playlist = musicselect(artist: artist,BPM: sensingBPM);
+              playlist = musicselect(genre:genre, artist:artist, BPM:sensingBPM);
             }, child: Text("前回より遅め(${previous_sensingBPM - 10})")
             ),
             TextButton(onPressed: (){
@@ -36,7 +36,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
               setState(() {
                 sensingBPM = previous_sensingBPM;
               });
-              playlist = musicselect(artist:artist,BPM:sensingBPM);
+              playlist = musicselect(genre:genre, artist:artist, BPM:sensingBPM);
             }, child: Text("前回(${previous_sensingBPM})")
             ),
             TextButton(onPressed: (){
@@ -45,7 +45,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                 sensingBPM = previous_sensingBPM + 10;
                 previous_sensingBPM += 10;
               });
-              playlist = musicselect(artist: artist, BPM: sensingBPM);
+              playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
             }, child: Text("前回より早め(${previous_sensingBPM + 10})")
             ),
             TextButton(onPressed: (){

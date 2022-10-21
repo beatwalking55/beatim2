@@ -1,13 +1,15 @@
 import 'package:beatim/variables.dart';
+import 'musicdata.dart';
+import 'variables.dart';
 
-musicselect({ artist, BPM}){
-  if (artist == "ミセス"){
-    if (BPM < 170){
-      return [1,1,1,1,1];
-    }else{
-      return [0,2,2,2,2];
+final numList = List.generate(musics.length, (index) => index);
+
+musicselect({genre, artist, BPM}){
+  List<int> playList = [];
+  for (int num in numList){
+    if (musics[num]['genre1']== genre && musics[num]['artist']== artist){
+      playList.add(num);
     }
-  }else{
-    return [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22];
   }
+  return playList;
 }

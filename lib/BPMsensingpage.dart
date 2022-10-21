@@ -71,7 +71,7 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                     changingspeed = true;
                     changingspeedbutton = "原曲";
                     previous_sensingBPM = sensingBPM;
-                    playlist = musicselect(artist: artist, BPM: sensingBPM);
+                    playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
                   });
                 },
                 child: Text("計測終了")
