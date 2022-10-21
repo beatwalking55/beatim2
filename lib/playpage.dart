@@ -5,6 +5,7 @@ import 'package:beatim/musicdata.dart';
 import 'package:beatim/variables.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({Key? key}) : super(key: key);
@@ -178,6 +179,35 @@ class _PlayPageState extends State<PlayPage> {
               });
             }, child: Text("再計測")
             ),
+            TextButton(
+                onPressed:()async{
+                  if (await canLaunch('https://docs.google.com/forms/d/e/1FAIpQLSdHaYCO4SPZdX85eiUK9luVBR3NATbVb2WmdTkRf-Ml0neRgg/viewform?usp=sf_link')) {
+                    await launch(
+                      'https://docs.google.com/forms/d/e/1FAIpQLSdHaYCO4SPZdX85eiUK9luVBR3NATbVb2WmdTkRf-Ml0neRgg/viewform?usp=sf_link',
+                      forceSafariVC: false,
+                      //forceWebView: true,
+                    );
+                  } else {
+                    throw 'このURLにはアクセスできません';
+                  }
+                },
+                child: Text("評価フォームへ")),
+            // Visibility(
+            //   visible: visible,
+            //   maintainSize: true,
+            //   maintainAnimation: true,
+            //   maintainState: true,
+            //   child: TextButton(onPressed: () async {
+            //     // player.pause();
+            //     await Navigator.of(context).push(
+            //         MaterialPageRoute(
+            //             builder:(context) => logpage()
+            //         )
+            //     );
+            //   }, child: Text("評価ページへ")
+            //   ),
+            // ),
+            SizedBox(height: 15,)
           ],
         ),
       ),
