@@ -10,8 +10,20 @@ class ArtistSelectPage extends StatefulWidget {
   State<ArtistSelectPage> createState() => _artistselectState();
 }
 
+final _numList = List.generate(musics.length, (index) => index);
+genreatristsearch(genre){
+  List<String> artistList = [];
+  for (int num in _numList){
+    if (musics[num]['genre1'] == genre){
+      artistList.add(musics[num]['artist']);
+    }
+  }
+  return artistList;
+}
+
+
 class _artistselectState extends State<ArtistSelectPage> {
-  final List artistList = List.generate(musics.length, (index) => musics[index]['artist']).toSet().toList();
+  final List artistList = genreatristsearch(genre).toSet().toList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
