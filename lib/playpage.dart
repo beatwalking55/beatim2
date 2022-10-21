@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:beatim/BPMsensingpage.dart';
 import 'package:beatim/variables.dart';
 import 'package:flutter/material.dart';
