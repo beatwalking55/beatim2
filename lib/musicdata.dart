@@ -1,9 +1,21 @@
 import 'package:flutter/material.dart';
 Map musics = {
   0: {
-    'name': "Mrs. GREEN APPLE_Inferno_BPM185",
     'filename': "audio/Mrs. GREEN APPLE_Inferno_BPM185.mp3",
-    'BPM': 185
+    'name': "Mrs. GREEN APPLE_Inferno_BPM185",
+    'artist': "Mrs. GREEN APPLE",
+    'BPM': 185,
+    'feltBPM':185,
+    'genre1': "j-rock",
+    'genre2': 0,
+    'danceability': 0,
+    'energy': 0,
+    'content loudness': 0,
+    'shuffle': 0,
+    'waltz': 0,
+    'bpmHalf': 0,
+    'bpmNotHalf': 0,
+    'bpmIntro': 0
   },
   1: {
     'name': "Mrs. GREEN APPLE_WanteD WanteD_BPM160",
