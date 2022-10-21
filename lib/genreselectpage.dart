@@ -1,6 +1,7 @@
 import 'package:beatim/artistselectpage.dart';
 import 'package:flutter/material.dart';
 import 'variables.dart';
+import 'musicdata.dart';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -21,7 +22,7 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
+  final List genreList = List.generate(musics.length, (index) => musics[index]['genre1']).toSet().toList();
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -56,12 +57,21 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            TextButton(onPressed: (){
-              Navigator.push(context,MaterialPageRoute(builder:(context) =>ArtistSelectPage()));
-              setState(() {
-                genre = "邦ロック";
-              });
-            }, child: Text("邦ロック")
+            Flexible(
+                child: ListView.builder(
+                  itemCount: genreList.length,
+                  itemBuilder:(BuildContext context, int index){
+                    return Container(
+                      child: TextButton(onPressed: (){
+                        Navigator.push(context,MaterialPageRoute(builder:(context) =>ArtistSelectPage()));
+                        setState(() {
+                          genre = genreList[index];
+                        });
+                      }, child: Text(genreList[index])
+                      ),
+                    );
+                  },
+              ),
             ),
           ],
         ),
