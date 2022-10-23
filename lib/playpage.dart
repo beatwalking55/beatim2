@@ -39,7 +39,7 @@ class _PlayPageState extends State<PlayPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text("ジャンル：${genre}"),
+            Text("ジャンル：${genre}",),
             Text("アーティスト：${artist}"),
             Text("BPM：${sensingBPM}"),
             Flexible(
@@ -145,6 +145,13 @@ class _PlayPageState extends State<PlayPage> {
                 previous_sensingBPM = sensingBPM;
               });
             }, child: Text("再計測")
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("曲ID ${playlist[playingmusic]}   ",style: TextStyle(fontSize: 30),),
+                Text("BPM  ${sensingBPM.toInt()}",style: TextStyle(fontSize: 30),),
+              ],
             ),
             TextButton(
                 onPressed:()async{
