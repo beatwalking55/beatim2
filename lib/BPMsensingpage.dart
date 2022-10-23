@@ -11,6 +11,7 @@ class BPMSensingPage extends StatefulWidget {
 }
 
 class _BPMSensingPageState extends State<BPMSensingPage> {
+  int counter = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,6 +37,17 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                 });
                 bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
                 print(bpm_ratio);
+                counter += 1;
+                if (counter == 6){
+                  Navigator.pop(context);
+                  setState(() {
+                    player.setSpeed(bpm_ratio);
+                    changingspeed = true;
+                    changingspeedbutton = "原曲";
+                    previous_sensingBPM = sensingBPM;
+                    playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
+                  });
+                }
               },
           
 
@@ -61,21 +73,26 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
           children:<Widget>[ 
       Positioned(
         top: 300.0,
-            child: Text("BPM:${sensingBPM}"),
+            child: Column(
+              children: [
+                Text("走るリズムに合わせて画面をタップ"),
+                Text("BPM:${sensingBPM}"),
+              ],
+            ),
           ),  
-            TextButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                  setState(() {
-                    player.setSpeed(bpm_ratio);
-                    changingspeed = true;
-                    changingspeedbutton = "原曲";
-                    previous_sensingBPM = sensingBPM;
-                    playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
-                  });
-                },
-                child: Text("計測終了")
-                ),
+            // TextButton(
+            //     onPressed: () {
+            //       Navigator.pop(context);
+            //       setState(() {
+            //         player.setSpeed(bpm_ratio);
+            //         changingspeed = true;
+            //         changingspeedbutton = "原曲";
+            //         previous_sensingBPM = sensingBPM;
+            //         playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
+            //       });
+            //     },
+            //     child: Text("計測終了")
+            //     ),
               
             ],
           ),  
