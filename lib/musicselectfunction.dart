@@ -13,9 +13,9 @@ musicselect({genre, artist, BPM}){
   List<int> playList_b2 = [];
   List<int> playList_c2 = [];
   for (int num in _numList){
-    if (musics[num]['genre1']== genre && musics[num]['artist']== artist){
+    if ((musics[num]['genre1']== genre || musics[num]['genre2'].toString() == genre) && musics[num]['artist']== artist){
       playList_a.add([num, (BPM - musics[num]['BPM']).abs()]);
-    } else if (musics[num]['genre1'] == genre && musics[num]['artist']!= artist){
+    } else if (musics[num]['genre1'] == genre || musics[num]['genre2'] ==genre){
       playList_b.add([num, (BPM - musics[num]['BPM']).abs()]);
     }else{
       playList_c.add([num, (BPM - musics[num]['BPM']).abs()]);

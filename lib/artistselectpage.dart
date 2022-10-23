@@ -14,7 +14,7 @@ final _numList = List.generate(musics.length, (index) => index);
 genreatristsearch(genre){
   List<String> artistList = [];
   for (int num in _numList){
-    if (musics[num]['genre1'] == genre){
+    if (musics[num]['genre1'] == genre || musics[num]['genre2'] == genre){
       artistList.add(musics[num]['artist']);
     }
   }
