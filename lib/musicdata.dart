@@ -103,7 +103,7 @@ Map musics = {
     'bpmIntro': 0
   },
   6: {
-    'filename': "audio/ステレオガール_おやすみクットナイト_BPM138.mp3",
+    'filename': "audio/ステレオカール_おやすみクットナイト_BPM138.mp3",
     'name': "ステレオガール_おやすみグッドナイト_BPM138",
     'artist': "ステレオガール",
     'BPM': 138,
