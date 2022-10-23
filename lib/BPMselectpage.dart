@@ -48,10 +48,15 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
               playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
             }, child: Text("前回より早め(${previous_sensingBPM + 10})")
             ),
-            TextButton(onPressed: (){
-              Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSensingPage()));
-            }, child: Text("新しく登録（計測ページへ）")
-            ),
+            TextButton(onPressed: () async {
+              // player.pause();
+              await Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder:(context) => BPMSensingPage()
+                  )
+              );
+              setState(() {});
+            }, child: Text("新しく登録（計測ページへ）")),
             TextButton(onPressed: (){
               Navigator.pop(context);
             }, child: Text("アーティスト選択にもどる")

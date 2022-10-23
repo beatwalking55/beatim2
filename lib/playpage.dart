@@ -47,65 +47,32 @@ class _PlayPageState extends State<PlayPage> {
                 itemCount: playlist.length,
                 itemBuilder: (BuildContext context, int index){
                   return Container(
-                    //padding: EdgeInsets.all(10),
                     alignment:Alignment.centerLeft,
-
                     child: Container(
                       width:double.infinity,
-                     child:ElevatedButton.icon(
-                    icon: Icon(Icons.play_arrow),
-
-  label: Text(musics[playlist[index]]['name']),
-  onPressed: () {
-    
-                              setState(() {
-                                visible = true;
-                                playingmusic = index;
-                                playericon = Icons.pause;
-                                music = musics[playlist[index]]['filename'];
-                                ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];
-                                bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
-                                player.setSpeed(bpm_ratio);
-                                changingspeed = true;
-                                changingspeedbutton = "原曲";
-                              });
-                              _loadAudioFile();
-                              _playSoundFile();
-                            },
-),
-                    
-                     
-                    //padding: EdgeInsets.all(10),
-                    //child: Row(
-                      //children: [
-                        //IconButton(
-                            //icon: const Icon(Icons.play_arrow),
-                           // child:GestureDetector(
-                         // child:Row(
-                        //  children:[
-                       // Icon(Icons.play_arrow),
-                      //  Text(musics[playlist[index]]['name']),
-                      //    ],
-                      //  ),
-                           // onTap: () {
-                             // setState(() {
-                             //   visible = true;
-                             //   playingmusic = index;
-                             //   playericon = Icons.pause;
-                             //   music = musics[playlist[index]]['filename'];
-                             //   ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];
-                            //  });
-                           //   _loadAudioFile();
-                          //    _playSoundFile();
-                          //  },
-
-                      //],
-                   // ),
-                  ),
+                      child:ElevatedButton.icon(
+                        icon: Icon(Icons.play_arrow),
+                        label: Text(musics[playlist[index]]['name']),
+                        onPressed: () {
+                          setState(() {
+                            visible = true;
+                            playingmusic = index;
+                            playericon = Icons.pause;
+                            music = musics[playlist[index]]['filename'];
+                            ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];
+                            bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
+                            player.setSpeed(bpm_ratio);
+                            changingspeed = true;
+                            changingspeedbutton = "原曲";
+                          });
+                          _loadAudioFile();
+                          _playSoundFile();
+                        },
+                      ),
+                    ),
                   );
                 },
-//separatorBuilder: (context, index) => Divider(height: .0),              】
-),
+              ),
             ),
             Visibility(
               visible: visible,
@@ -133,7 +100,6 @@ class _PlayPageState extends State<PlayPage> {
                       setState(() {
                         playericon = Icons.pause;
                         music = musics[playlist[playingmusic]]['filename'];
-
                       });
                       _playSoundFile();
                     }else{
@@ -142,7 +108,6 @@ class _PlayPageState extends State<PlayPage> {
                         playericon = Icons.play_arrow;
                       });
                     }
-
                   },
                       icon: Icon(playericon)
                   ),
@@ -233,7 +198,6 @@ Future<void> _loadAudioFile() async {
   } catch(e) {
     print(e);
   }
-
 }
 
 Future<void> _playSoundFile() async {
@@ -241,7 +205,5 @@ Future<void> _playSoundFile() async {
   if(player.processingState == ProcessingState.completed) {
     await _loadAudioFile();
   }
-
-  // await player.setSpeed(bpm_ratio); // 再生速度を指定
   await player.play();
 }
