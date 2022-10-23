@@ -52,7 +52,7 @@ Map musics = {
     'bpmIntro': 0
   },
   3: {
-    'filename': "audio/WANIMA_アゲイン_BPM195.mp3",
+    'filename': "audio/WANIMA_アケイン_BPM195.mp3",
     'name': "WANIMA_アゲイン_BPM195",
     'artist': "WANIMA",
     'BPM': 195,
@@ -103,7 +103,7 @@ Map musics = {
     'bpmIntro': 0
   },
   6: {
-    'filename': "audio/ステレオガール_おやすみグッドナイト_BPM138.mp3",
+    'filename': "audio/ステレオガール_おやすみクットナイト_BPM138.mp3",
     'name': "ステレオガール_おやすみグッドナイト_BPM138",
     'artist': "ステレオガール",
     'BPM': 138,
@@ -205,8 +205,8 @@ Map musics = {
     'bpmIntro': 0
   },
   12: {
-    'filename': "audio/サカナクション  ミュージック_BPM136.mp3",
-    'name': "サカナクション  ミュージック_BPM136",
+    'filename': "audio/サカナクション  ミューシック_BPM136.mp3",
+    'name': "サカナクション  ミュージック_BPM136",
     'artist': "サカナクション",
     'BPM': 136,
     'feltBPM':136,
@@ -341,7 +341,7 @@ Map musics = {
     'bpmIntro': 0
   },
   20: {
-    'filename': "audio/サンプラザ中野くん_Runner_BPM124.mp3",
+    'filename': "audio/サンフラサ中野くん_Runner_BPM124.mp3",
     'name': "サンプラザ中野くん_Runner_BPM124",
     'artist': "サンプラザ中野くん",
     'BPM': 124,

@@ -13,7 +13,7 @@ var changingspeed = true;
 var changingspeedbutton = "原曲";
 
 double bpm_ratio = 1.0;
-int ORIGINAL_musicBPM = 138; //goodnight:138, bgm1:152
+double ORIGINAL_musicBPM = 138; //goodnight:138, bgm1:152
 bool _changeAudioSource = true;
 String _stateSource = 'アセットを再生';
 int oldtime = 0;

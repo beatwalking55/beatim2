@@ -167,7 +167,8 @@ class _PlayPageState extends State<PlayPage> {
                 ],
               ),
             ),
-            TextButton(onPressed: () async {
+            TextButton(
+              onPressed: () async {
               // player.pause();
               await Navigator.of(context).push(
                 MaterialPageRoute(
