@@ -49,6 +49,9 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
             }, child: Text("前回より早め(${previous_sensingBPM + 10})")
             ),
             TextButton(onPressed: () async {
+              setState(() {
+                comefrom = "bpmselectpage";
+              });
               // player.pause();
               await Navigator.of(context).push(
                 MaterialPageRoute(

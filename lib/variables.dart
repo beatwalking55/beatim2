@@ -11,6 +11,7 @@ int playingmusic = 0;
 var visible = false;
 var changingspeed = true;
 var changingspeedbutton = "原曲";
+String comefrom = "bpmselectpage";
 
 double bpm_ratio = 1.0;
 double ORIGINAL_musicBPM = 138; //goodnight:138, bgm1:152

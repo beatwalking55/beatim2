@@ -2,6 +2,7 @@ import 'package:beatim/musicselectfunction.dart';
 import 'package:beatim/playpage.dart';
 import 'package:flutter/material.dart';
 import 'package:beatim/variables.dart';
+import 'package:just_audio/just_audio.dart';
 
 class BPMSensingPage extends StatefulWidget {
   const BPMSensingPage({Key? key}) : super(key: key);
@@ -41,11 +42,13 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                 if (counter == 6){
                   Navigator.pop(context);
                   setState(() {
-                    player.setSpeed(bpm_ratio);
-                    changingspeed = true;
-                    changingspeedbutton = "原曲";
+                    if(comefrom == "playpage"){
+                      player.setSpeed(bpm_ratio);
+                      playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
+                      changingspeed = true;
+                      changingspeedbutton = "原曲";
+                    }
                     previous_sensingBPM = sensingBPM;
-                    playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
                   });
                 }
               },
