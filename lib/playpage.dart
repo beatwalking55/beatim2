@@ -53,7 +53,7 @@ class _PlayPageState extends State<PlayPage> {
                       child:ElevatedButton.icon(
                         icon: Icon(Icons.play_arrow),
                         label: Text(musics[playlist[index]]['name']),
-                        onPressed: () {
+                        onPressed: () async{
                           setState(() {
                             visible = true;
                             playingmusic = index;
@@ -65,8 +65,14 @@ class _PlayPageState extends State<PlayPage> {
                             changingspeed = true;
                             changingspeedbutton = "原曲";
                           });
-                          _loadAudioFile();
-                          _playSoundFile();
+                          player.setLoopMode(LoopMode.all);
+                          final newplaylist = ConcatenatingAudioSource(
+                            children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+                          );
+                          await player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
+                          player.play();
+                          // _loadAudioFile();
+                          // _playSoundFile();
                         },
                       ),
                     ),
@@ -114,19 +120,7 @@ class _PlayPageState extends State<PlayPage> {
                   //ここで先送りボタンを実装したかった
                   IconButton(
                       onPressed: (){
-                        player.pause();
-                        setState(() {
-                          if(playingmusic == playlist.length-1){
-                            playingmusic = 0;
-                          }else{
-                            playingmusic += 1;
-                          }
-                          music = musics[playlist[playingmusic]]['filename'];
-                        });
-                        _loadAudioFile();
-                        if (playericon == Icons.pause){
-                          _playSoundFile();
-                        }
+                        player.seekToNext();
                       },
                       icon: Icon(Icons.fast_forward))
                 ],
