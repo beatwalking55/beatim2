@@ -30,6 +30,10 @@ class _PlayPageState extends State<PlayPage> {
     super.dispose();
   }
 
+  ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
+    children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+  );
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -53,26 +57,24 @@ class _PlayPageState extends State<PlayPage> {
                       child:ElevatedButton.icon(
                         icon: Icon(Icons.play_arrow),
                         label: Text(musics[playlist[index]]['name']),
-                        onPressed: () async{
+                        onPressed: () {
                           setState(() {
                             visible = true;
-                            playingmusic = index;
-                            playericon = Icons.pause;
                             music = musics[playlist[index]]['filename'];
                             ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];
                             bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
                             player.setSpeed(bpm_ratio);
                             changingspeed = true;
                             changingspeedbutton = "原曲";
+                            playericon = Icons.pause;
                           });
-                          player.setLoopMode(LoopMode.all);
-                          final newplaylist = ConcatenatingAudioSource(
+                          ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
                             children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
                           );
-                          await player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
+                          player.setLoopMode(LoopMode.all);
+                          player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
                           player.play();
-                          // _loadAudioFile();
-                          // _playSoundFile();
+
                         },
                       ),
                     ),
@@ -87,7 +89,7 @@ class _PlayPageState extends State<PlayPage> {
               maintainState: true,
               child: Row(
                 children: [
-                  Expanded(child: Text(musics[playlist[playingmusic]]['name'], overflow: TextOverflow.ellipsis,)),
+                  Expanded(child: Text(musics[playlist[player.currentIndex ?? 0]]['name'], overflow: TextOverflow.ellipsis,)),
                   TextButton(
                       onPressed:(){ setState(() {
                         if(changingspeed == true){
@@ -102,25 +104,26 @@ class _PlayPageState extends State<PlayPage> {
                       });},
                       child: Text(changingspeedbutton)),
                   IconButton(onPressed:(){
-                    if(playericon == Icons.play_arrow){
-                      setState(() {
-                        playericon = Icons.pause;
-                        music = musics[playlist[playingmusic]]['filename'];
-                      });
-                      _playSoundFile();
-                    }else{
-                      player.pause();
+                    if(player.playing){
                       setState(() {
                         playericon = Icons.play_arrow;
                       });
+                      player.pause();
+                    }else{
+                      setState(() {
+                        playericon = Icons.pause;
+                      });
+                      player.play();
                     }
                   },
                       icon: Icon(playericon)
                   ),
-                  //ここで先送りボタンを実装したかった
+                  //ここで先送りボタンを実装した
                   IconButton(
-                      onPressed: (){
-                        player.seekToNext();
+                      onPressed: ()async{
+                        setState(() {
+                          player.seekToNext();
+                        });
                       },
                       icon: Icon(Icons.fast_forward))
                 ],
@@ -143,7 +146,7 @@ class _PlayPageState extends State<PlayPage> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Text("曲ID ${playlist[playingmusic]}   ",style: TextStyle(fontSize: 30),),
+                Text("曲ID ${playlist[player.currentIndex ?? 0]}   ",style: TextStyle(fontSize: 30),),
                 Text("BPM  ${sensingBPM.toInt()}",style: TextStyle(fontSize: 30),),
               ],
             ),
@@ -184,28 +187,8 @@ class _PlayPageState extends State<PlayPage> {
 }
 
 late AudioPlayer player;
-bool _changeAudioSource = false;
-
-
 Future<void> _setupSession() async {
   player = AudioPlayer();
   final session = await AudioSession.instance;
-  await session.configure(AudioSessionConfiguration.speech());
-  await _loadAudioFile();
-}
-
-Future<void> _loadAudioFile() async {
-  try {
-    await player.setAsset(music);
-  } catch(e) {
-    print(e);
-  }
-}
-
-Future<void> _playSoundFile() async {
-  // 再生終了状態の場合、新たなオーディオファイルを定義し再生できる状態にする
-  if(player.processingState == ProcessingState.completed) {
-    await _loadAudioFile();
-  }
-  await player.play();
+  await session.configure(AudioSessionConfiguration.speech());;
 }
