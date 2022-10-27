@@ -57,7 +57,10 @@ class _PlayPageState extends State<PlayPage> {
                       child:ElevatedButton.icon(
                         icon: Icon(Icons.play_arrow),
                         label: Text(musics[playlist[index]]['name']),
-                        onPressed: () {
+                        onPressed: () async{
+                          ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
+                            children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+                          );
                           setState(() {
                             visible = true;
                             music = musics[playlist[index]]['filename'];
@@ -68,13 +71,11 @@ class _PlayPageState extends State<PlayPage> {
                             changingspeedbutton = "原曲";
                             playericon = Icons.pause;
                           });
-                          ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
-                            children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
-                          );
-                          player.setLoopMode(LoopMode.all);
-                          player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
-                          player.play();
-
+                          await player.setLoopMode(LoopMode.all);
+                          await player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
+                          await player.play();
+                          setState(() {
+                          });
                         },
                       ),
                     ),
@@ -121,8 +122,8 @@ class _PlayPageState extends State<PlayPage> {
                   //ここで先送りボタンを実装した
                   IconButton(
                       onPressed: ()async{
+                        await player.seekToNext();
                         setState(() {
-                          player.seekToNext();
                         });
                       },
                       icon: Icon(Icons.fast_forward))
