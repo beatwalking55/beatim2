@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'genreselectpage.dart';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 
-void main() {
-  runApp(const MyApp());
+Future<void> main() async {
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+  
 
   // This widget is the root of your application.
   @override
@@ -27,6 +35,7 @@ class MyApp extends StatelessWidget {
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
+    
   }
 }
 
