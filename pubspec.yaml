@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   just_audio: ^0.9.29
   url_launcher: ^6.1.6
+  workmanager: ^0.5.0
 
 dev_dependencies:
   flutter_test:
