@@ -59,7 +59,7 @@ class _PlayPageState extends State<PlayPage> {
                         label: Text(musics[playlist[index]]['name']),
                         onPressed: () async{
                           ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
-                            children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+                            children:List.generate(playlist.length, (index) => AudioSource.uri(Uri.parse('asset:${musics[playlist[index]]['filename']}'))),
                           );
                           setState(() {
                             visible = true;
