@@ -13,6 +13,10 @@ class BPMSelectPage extends StatefulWidget {
 
 class _BPMSelectPageState extends State<BPMSelectPage> {
   @override
+  double _ratio = 1;
+  double _min_ratio = 0.7;
+  double _max_ratio = 1.5;
+  double _pase = 333*176;
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -29,7 +33,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                 previous_sensingBPM -= 10;
               });
               playlist = musicselect(genre:genre, artist:artist, BPM:sensingBPM);
-            }, child: Text("前回より遅め(${previous_sensingBPM - 10})")
+            }, child: Text("前回より遅め(${previous_sensingBPM - 10})(${((_pase/_ratio)/(previous_sensingBPM-10))~/60}min${(((_pase/_ratio)/(previous_sensingBPM-10))%60).toInt()}s/km)")
             ),
             TextButton(onPressed: (){
               Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
@@ -37,7 +41,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                 sensingBPM = previous_sensingBPM;
               });
               playlist = musicselect(genre:genre, artist:artist, BPM:sensingBPM);
-            }, child: Text("前回(${previous_sensingBPM})")
+            }, child: Text("前回(${previous_sensingBPM})(${((_pase/_ratio)/previous_sensingBPM)~/60}min${(((_pase/_ratio)/previous_sensingBPM)%60).toInt()}s/km)")
             ),
             TextButton(onPressed: (){
               Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
@@ -46,7 +50,7 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                 previous_sensingBPM += 10;
               });
               playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
-            }, child: Text("前回より早め(${previous_sensingBPM + 10})")
+            }, child: Text("前回より早め(${previous_sensingBPM + 10})(${((_pase/_ratio)/(previous_sensingBPM+10))~/60}min${(((_pase/_ratio)/(previous_sensingBPM+10))%60).toInt()}s/km)")
             ),
             TextButton(onPressed: () async {
               setState(() {
@@ -64,6 +68,18 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
               Navigator.pop(context);
             }, child: Text("アーティスト選択にもどる")
             ),
+            SizedBox(width: 0,height: 20,),
+            Text("走るペース"),
+            Slider(
+                value: _ratio,
+                min: _min_ratio,
+                max: _max_ratio,
+                onChanged:(value){
+                  setState(() {
+                    _ratio = value;
+                  });
+                }
+                )
           ],
         ),
       ),
