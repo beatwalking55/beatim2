@@ -58,7 +58,7 @@ class _PlayPageState extends State<PlayPage> {
                       child:ElevatedButton.icon(
                         icon: Icon(Icons.play_arrow),
                         label: Text(musics[playlist[index]]['name']),
-                        onPressed: () async{
+                        onPressed: () {
                           ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
                             children:List.generate(playlist.length, (index) => AudioSource.uri(Uri.parse('asset:${musics[playlist[index]]['filename']}'))),
                           );
@@ -72,9 +72,9 @@ class _PlayPageState extends State<PlayPage> {
                             changingspeedbutton = "原曲";
                             playericon = Icons.pause;
                           });
-                          await player.setLoopMode(LoopMode.all);
-                          await player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
-                          await player.play();
+                          player.setLoopMode(LoopMode.all);
+                          player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
+                          player.play();
                           setState(() {
                           });
                         },
@@ -127,8 +127,8 @@ class _PlayPageState extends State<PlayPage> {
                         ),
                         //ここで先送りボタンを実装した
                         IconButton(
-                            onPressed: () async {
-                              await player.seekToNext();
+                            onPressed: () {
+                              player.seekToNext();
                               setState(() {
 
                               });
@@ -154,34 +154,34 @@ class _PlayPageState extends State<PlayPage> {
               });
             }, child: Text("再計測")
             ),
-            Flexible(
-              child: StreamBuilder<int?>(
-                stream: player.currentIndexStream,
-                initialData: 0,
-                builder: (BuildContext context,snapshot){
-                  return Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text("曲ID ${playlist[snapshot.data ??0]}   ",style: TextStyle(fontSize: 30),),
-                      Text("BPM  ${sensingBPM.toInt()}",style: TextStyle(fontSize: 30),),
-                    ],
-                  );
-                }
-              ),
-            ),
-            TextButton(
-                onPressed:()async{
-                  if (await canLaunch('https://docs.google.com/forms/d/e/1FAIpQLSdHaYCO4SPZdX85eiUK9luVBR3NATbVb2WmdTkRf-Ml0neRgg/viewform?usp=sf_link')) {
-                    await launch(
-                      'https://docs.google.com/forms/d/e/1FAIpQLSdHaYCO4SPZdX85eiUK9luVBR3NATbVb2WmdTkRf-Ml0neRgg/viewform?usp=sf_link',
-                      forceSafariVC: false,
-                      //forceWebView: true,
-                    );
-                  } else {
-                    throw 'このURLにはアクセスできません';
-                  }
-                },
-                child: Text("評価フォームへ")),
+            // Flexible(
+            //   child: StreamBuilder<int?>(
+            //     stream: player.currentIndexStream,
+            //     initialData: 0,
+            //     builder: (BuildContext context,snapshot){
+            //       return Row(
+            //         mainAxisAlignment: MainAxisAlignment.center,
+            //         children: [
+            //           Text("曲ID ${playlist[snapshot.data ??0]}   ",style: TextStyle(fontSize: 30),),
+            //           Text("BPM  ${sensingBPM.toInt()}",style: TextStyle(fontSize: 30),),
+            //         ],
+            //       );
+            //     }
+            //   ),
+            // ),
+            // TextButton(
+            //     onPressed:()async{
+            //       if (await canLaunch('https://docs.google.com/forms/d/e/1FAIpQLSdHaYCO4SPZdX85eiUK9luVBR3NATbVb2WmdTkRf-Ml0neRgg/viewform?usp=sf_link')) {
+            //         await launch(
+            //           'https://docs.google.com/forms/d/e/1FAIpQLSdHaYCO4SPZdX85eiUK9luVBR3NATbVb2WmdTkRf-Ml0neRgg/viewform?usp=sf_link',
+            //           forceSafariVC: false,
+            //           //forceWebView: true,
+            //         );
+            //       } else {
+            //         throw 'このURLにはアクセスできません';
+            //       }
+            //     },
+            //     child: Text("評価フォームへ")),
              Visibility(
                visible: visible,
                maintainSize: true,

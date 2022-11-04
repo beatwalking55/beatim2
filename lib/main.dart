@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 import 'genreselectpage.dart';
 import 'package:audioplayers/audioplayers.dart';
-import 'package:just_audio_background/just_audio_background.dart';
+//import 'package:just_audio_background/just_audio_background.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-   await JustAudioBackground.init(
-     androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
-     androidNotificationChannelName: 'Audio playback',
-    androidNotificationOngoing: true,
-   );
+  WidgetsFlutterBinding.ensureInitialized();
+   //await JustAudioBackground.init(
+   //  androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+   //  androidNotificationChannelName: 'Audio playback',
+   // androidNotificationOngoing: true,
+   //);
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
