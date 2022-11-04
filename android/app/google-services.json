@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "452769774588",
+    "project_id": "beatimtest",
+    "storage_bucket": "beatimtest.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:452769774588:android:6193b4c19b1be10dfbd079",
+        "android_client_info": {
+          "package_name": "beatim.com.beatim"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "452769774588-46vhur1gvnt6vp5pin0avl65iiefb9k1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAazCYB1sMhLAi6Yoqlqd2VZbGB2XUNVFo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "452769774588-46vhur1gvnt6vp5pin0avl65iiefb9k1.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "452769774588-kp0dhq13ntgh6pkb67102g9psdbg3ae6.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "beatim.com.beatim"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -7,6 +7,7 @@ import 'package:beatim/variables.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'logpage.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({Key? key}) : super(key: key);
@@ -57,7 +58,7 @@ class _PlayPageState extends State<PlayPage> {
                       child:ElevatedButton.icon(
                         icon: Icon(Icons.play_arrow),
                         label: Text(musics[playlist[index]]['name']),
-                        onPressed: () {
+                        onPressed: () async{
                           ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
                             children:List.generate(playlist.length, (index) => AudioSource.uri(Uri.parse('asset:${musics[playlist[index]]['filename']}'))),
                           );
@@ -71,9 +72,9 @@ class _PlayPageState extends State<PlayPage> {
                             changingspeedbutton = "原曲";
                             playericon = Icons.pause;
                           });
-                          player.setLoopMode(LoopMode.all);
-                          player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
-                          player.play();
+                          await player.setLoopMode(LoopMode.all);
+                          await player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
+                          await player.play();
                           setState(() {
                           });
                         },
@@ -126,8 +127,11 @@ class _PlayPageState extends State<PlayPage> {
                         ),
                         //ここで先送りボタンを実装した
                         IconButton(
-                            onPressed: (){
-                              player.seekToNext();
+                            onPressed: () async {
+                              await player.seekToNext();
+                              setState(() {
+
+                              });
                             },
                             icon: Icon(Icons.fast_forward))
                       ],
@@ -178,21 +182,21 @@ class _PlayPageState extends State<PlayPage> {
                   }
                 },
                 child: Text("評価フォームへ")),
-            // Visibility(
-            //   visible: visible,
-            //   maintainSize: true,
-            //   maintainAnimation: true,
-            //   maintainState: true,
-            //   child: TextButton(onPressed: () async {
-            //     // player.pause();
-            //     await Navigator.of(context).push(
-            //         MaterialPageRoute(
-            //             builder:(context) => logpage()
-            //         )
-            //     );
-            //   }, child: Text("評価ページへ")
-            //   ),
-            // ),
+             Visibility(
+               visible: visible,
+               maintainSize: true,
+               maintainAnimation: true,
+               maintainState: true,
+               child: TextButton(onPressed: () async {
+                 // player.pause();
+                 await Navigator.of(context).push(
+                     MaterialPageRoute(
+                         builder:(context) => logpage()
+                     )
+                 );
+               }, child: Text("評価ページへ")
+               ),
+             ),
             SizedBox(height: 15,)
           ],
         ),

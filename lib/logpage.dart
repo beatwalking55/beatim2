@@ -1,50 +1,64 @@
 // import 'dart:io';
 //
-// import 'package:beatim/variables.dart';
-// import 'package:flutter/material.dart';
-// import 'log.dart';
-// import 'musicdata.dart';
-// import 'package:url_launcher/url_launcher.dart';
-// import 'variables.dart';
+import 'package:beatim/variables.dart';
+import 'package:flutter/material.dart';
+import 'log.dart';
+import 'musicdata.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'variables.dart';
+import 'playpage.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+
+class logpage extends StatefulWidget {
+  const logpage({Key? key}) : super(key: key);
+  @override
+  State<logpage> createState() => _logpageState();
+}
 //
-// class logpage extends StatefulWidget {
-//   const logpage({Key? key}) : super(key: key);
-//
-//   @override
-//   State<logpage> createState() => _logpageState();
-// }
-//
-// class _logpageState extends State<logpage> {
-//   @override
-//   Widget build(BuildContext context) {
-//     return Scaffold(
-//       appBar: AppBar(
-//         title:Text('再生した曲一覧')
-//       ),
-//       body: Column(
-//         children: [
-//           Center(child: Text("星をタップして評価")),
-//           Row(
-//             mainAxisAlignment: MainAxisAlignment.center,
-//             children: [
-//             for (var i = 0; i < 5; i++)
-//               IconButton(
-//                   onPressed:(){
-//                     setState(() {
-//                       log[log.length] = {
-//                         'month':DateTime.now().month,
-//                         'day':DateTime.now().day,
-//                         'song':musics[playingmusic]['name'],
-//                         'saiseisitaBPM':sensingBPM,
-//                         'evaluation': i + 1,
-//                       };
-//                     });
-//                     Navigator.pop(context);
-//                   },
-//                   icon: const Icon(Icons.star_border)
-//               ),
-//             ],
-//           ),
+class _logpageState extends State<logpage> {
+  var db = FirebaseFirestore.instance;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title:Text('再生した曲一覧')
+      ),
+      body: Column(
+        children: [
+          Center(child: Text("星をタップして評価")),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              for (var i = 0; i < 5; i++)
+              IconButton(
+                  onPressed:(){
+                    // Create a new user with a first and last name
+                    var user = <String, dynamic>{
+                      "month": DateTime.now().month,
+                      "day": DateTime.now().day,
+                      "song": musics[playlist[player.currentIndex ?? 0]]['name'],
+                      "saiseisitaBPM": sensingBPM,
+                      "evaluation":i+1,
+                    };
+
+// Add a new document with a generated ID
+                    db.collection("users").add(user).then((DocumentReference doc) =>
+                        print('DocumentSnapshot added with ID: ${doc.id}'));
+                    setState(() {
+                      log[log.length] = {
+                        'month':DateTime.now().month,
+                        'day':DateTime.now().day,
+                        'song':musics[playlist[player.currentIndex ?? 0]]['name'],
+                        'saiseisitaBPM':sensingBPM,
+                        'evaluation': i + 1,
+                      };
+                    });
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(Icons.star_border)
+              ),
+            ],
+          ),
 //           TextButton(
 //               onPressed:()async{
 //                 if (await canLaunch('https://docs.google.com/forms/d/e/1FAIpQLSdHaYCO4SPZdX85eiUK9luVBR3NATbVb2WmdTkRf-Ml0neRgg/viewform?usp=sf_link')) {
@@ -90,8 +104,8 @@
 //               },
 //             ),
 //           ),
-//         ],
-//       ),
-//     );
-//   }
-// }
+        ],
+      ),
+    );
+  }
+}
