@@ -30,10 +30,12 @@ class _PlayPageState extends State<PlayPage> {
     player.dispose();
     super.dispose();
   }
-
+  //プレイリストを最初に生成。
   ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
     children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
   );
+
+  var _playericon = Icons.play_arrow; //playpageの下の方に表示されるマーク play_arrow:再生マーク　pause:停止マーク
 
   Widget build(BuildContext context) {
     return Scaffold(
@@ -47,6 +49,7 @@ class _PlayPageState extends State<PlayPage> {
             Text("ジャンル：${genre}",),
             Text("アーティスト：${artist}"),
             Text("BPM：${sensingBPM}"),
+            //曲を選んで再生する部分。
             Flexible(
               child: ListView.builder(
                 itemCount: playlist.length,
@@ -56,27 +59,29 @@ class _PlayPageState extends State<PlayPage> {
                     child: Container(
                       width:double.infinity,
                       child:ElevatedButton.icon(
-                        icon: Icon(Icons.play_arrow),
-                        label: Text(musics[playlist[index]]['name']),
+                        icon: Icon(Icons.play_arrow),//再生マーク
+                        label: Text(musics[playlist[index]]['name']),//曲名
                         onPressed: () {
+                          //タップされた時の処理
+                          //プレイリストを生成（消すと再計測時にバグる）（できればこの部分消したい）
                           ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
                             children:List.generate(playlist.length, (index) => AudioSource.uri(Uri.parse('asset:${musics[playlist[index]]['filename']}'))),
                           );
                           setState(() {
-                            visible = true;
-                            music = musics[playlist[index]]['filename'];
-                            ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];
-                            bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
-                            player.setSpeed(bpm_ratio);
-                            changingspeed = true;
-                            changingspeedbutton = "原曲";
-                            playericon = Icons.pause;
+                            visible = true;//下の再生バーを表示する
+                            music = musics[playlist[index]]['filename'];//曲のファイル名を指定
+                            ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];//曲のBPMを指定
+                            bpm_ratio = sensingBPM / ORIGINAL_musicBPM;//再生スピードを指定
+                            player.setSpeed(bpm_ratio);//再生スピードを設定・
+                            changingspeed = true;//変速していることを示す
+                            changingspeedbutton = "原曲";//再生バーの表示を変更（最初は走る速度で再生するから、「原曲」ボタンになる）
+                            _playericon = Icons.pause;//再生バーのアイコン(再生時には「停止」マークになる)
                           });
-                          player.setLoopMode(LoopMode.all);
-                          player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);
-                          player.play();
+                          player.setLoopMode(LoopMode.all);//ループ再生on
+                          player.setAudioSource(newplaylist,initialIndex: index,initialPosition: Duration.zero);//index番目の曲をplayerにセット
+                          player.play();//playerを再生
                           setState(() {
-                          });
+                          });//再描画
                         },
                       ),
                     ),
@@ -84,19 +89,23 @@ class _PlayPageState extends State<PlayPage> {
                 },
               ),
             ),
+
             Flexible(
-              child: Visibility(
+              //画面の下にある再生バー的なやつ。一曲目が再生されるまで表示されない
+              child: Visibility(//表示・非表示を切り替えられる
                 visible: visible,
                 maintainSize: true,
                 maintainAnimation: true,
                 maintainState: true,
-                child:StreamBuilder<int?>(
+                child:StreamBuilder<int?>(//常に最新状態を描画してくれる
                   stream: player.currentIndexStream,
                   initialData: 0,
                   builder: (BuildContext context, snapshot){
                     return  Row(
                       children: [
                         Expanded(child: Text(musics[playlist[player.currentIndex ?? 0]]['name'], overflow: TextOverflow.ellipsis,)),
+
+                        //原曲・走る速度切り替えボタン
                         TextButton(
                             onPressed:(){ setState(() {
                               if(changingspeed == true){
@@ -109,23 +118,26 @@ class _PlayPageState extends State<PlayPage> {
                                 changingspeedbutton = "原曲";
                               }
                             });},
-                            child: Text(changingspeedbutton)),
+                            child: Text(changingspeedbutton),
+                        ),
+
+                        //再生・停止ボタン・
                         IconButton(onPressed:(){
                           if(player.playing){
                             setState(() {
-                              playericon = Icons.play_arrow;
+                              _playericon = Icons.play_arrow;
                             });
                             player.pause();
                           }else{
                             setState(() {
-                              playericon = Icons.pause;
+                              _playericon = Icons.pause;
                             });
                             player.play();
                           }
                         },
-                            icon: Icon(playericon)
+                            icon: Icon(_playericon)
                         ),
-                        //ここで先送りボタンを実装した
+                        //先送りボタン
                         IconButton(
                             onPressed: () {
                               player.seekToNext();
@@ -140,6 +152,8 @@ class _PlayPageState extends State<PlayPage> {
                 )
               ),
             ),
+
+            //BPMを再計測するページに行くボタン。
             TextButton(
               onPressed: () async {
               // player.pause();
@@ -154,6 +168,7 @@ class _PlayPageState extends State<PlayPage> {
               });
             }, child: Text("再計測")
             ),
+            //曲IDとBPMを表示する。
             // Flexible(
             //   child: StreamBuilder<int?>(
             //     stream: player.currentIndexStream,
@@ -169,6 +184,7 @@ class _PlayPageState extends State<PlayPage> {
             //     }
             //   ),
             // ),
+            //評価フォームへのリンクを画面に表示。
             // TextButton(
             //     onPressed:()async{
             //       if (await canLaunch('https://docs.google.com/forms/d/e/1FAIpQLSdHaYCO4SPZdX85eiUK9luVBR3NATbVb2WmdTkRf-Ml0neRgg/viewform?usp=sf_link')) {
@@ -181,7 +197,9 @@ class _PlayPageState extends State<PlayPage> {
             //         throw 'このURLにはアクセスできません';
             //       }
             //     },
-            //     child: Text("評価フォームへ")),
+            //child: Text("評価フォームへ")),
+
+            //評価ページに行くボタン。一曲目が再生されるまで表示されない。
              Visibility(
                visible: visible,
                maintainSize: true,

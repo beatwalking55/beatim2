@@ -1,7 +1,11 @@
 import 'package:beatim/artistselectpage.dart';
+import 'package:beatim/musicselectfunction.dart';
 import 'package:flutter/material.dart';
 import 'variables.dart';
 import 'musicdata.dart';
+import 'playpage.dart';
+import 'artistselectpage.dart';
+import 'dart:math';
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key, required this.title}) : super(key: key);
@@ -23,6 +27,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   final List genreList = List.generate(musics.length, (index) => musics[index]['genre1']).toSet().toList();
+  var random = new Random();
   @override
   Widget build(BuildContext context) {
     // This method is rerun every time setState is called, for instance as done
@@ -57,6 +62,16 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            TextButton(onPressed: (){
+              setState(() {
+                genre = genreList[random.nextInt(genreList.length)];
+                List artistList = genreatristsearch(genre);
+                artistList.toSet();
+                artist = artistList[random.nextInt(artistList.length)];
+                playlist = musicselect(genre: genre,artist:artist,BPM: previous_sensingBPM);
+              });
+              Navigator.push(context, MaterialPageRoute(builder: (context) => PlayPage()));
+            }, child: Text("おまかせ")),
             Flexible(
                 child: ListView.builder(
                   itemCount: genreList.length,

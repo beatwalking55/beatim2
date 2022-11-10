@@ -10,12 +10,13 @@ class ArtistSelectPage extends StatefulWidget {
   State<ArtistSelectPage> createState() => _artistselectState();
 }
 
-final _numList = List.generate(musics.length, (index) => index);
+//選択されたgenreをもつartistを全て上げる。この時、返されるartistListには重複がある
 genreatristsearch(genre){
+  int i = 0;
   List<String> artistList = [];
-  for (int num in _numList){
-    if (musics[num]['genre1'] == genre || musics[num]['genre2'] == genre){
-      artistList.add(musics[num]['artist']);
+  for (i = 0; i < musics.length; i++){    //musicsの長さだけiを走らせる
+    if (musics[i]['genre1'] == genre || musics[i]['genre2'] == genre){
+      artistList.add(musics[i]['artist']);  //もしgenre1かgenre2がgenreと一致すれば追加する。
     }
   }
   return artistList;
@@ -23,7 +24,7 @@ genreatristsearch(genre){
 
 
 class _artistselectState extends State<ArtistSelectPage> {
-  final List artistList = genreatristsearch(genre).toSet().toList();
+  final List artistList = genreatristsearch(genre).toSet().toList();//artistListを生成し、重複を削除。
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +35,7 @@ class _artistselectState extends State<ArtistSelectPage> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:<Widget> [
+            //アーティスト一覧。
            Flexible(
                child: ListView.builder(
                  itemCount: artistList.length,

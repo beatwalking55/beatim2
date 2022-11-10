@@ -59,6 +59,8 @@ class _logpageState extends State<logpage> {
               ),
             ],
           ),
+
+//googleフォームへのリンク（多分もう使わない）
 //           TextButton(
 //               onPressed:()async{
 //                 if (await canLaunch('https://docs.google.com/forms/d/e/1FAIpQLSdHaYCO4SPZdX85eiUK9luVBR3NATbVb2WmdTkRf-Ml0neRgg/viewform?usp=sf_link')) {
@@ -72,6 +74,8 @@ class _logpageState extends State<logpage> {
 //                 }
 //               },
 //               child: Text("評価フォームへ")),
+
+//評価一覧。(ログとして今後使うかもしれない)
 //           Flexible(
 //             child: ListView.builder(
 //               itemCount: log.length,
@@ -104,6 +108,7 @@ class _logpageState extends State<logpage> {
 //               },
 //             ),
 //           ),
+
         ],
       ),
     );
