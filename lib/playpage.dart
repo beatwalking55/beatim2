@@ -6,6 +6,7 @@ import 'package:beatim/musicdata.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
 import 'logpage.dart';
+import 'variables.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({Key? key}) : super(key: key);
@@ -66,6 +67,7 @@ class _PlayPageState extends State<PlayPage> {
                             children:List.generate(playlist.length, (index) => AudioSource.uri(Uri.parse('asset:${musics[playlist[index]]['filename']}'))),
                           );
                           setState(() {
+                            formar_playlist = playlist;
                             visible = true;//下の再生バーを表示する
                             music = musics[playlist[index]]['filename'];//曲のファイル名を指定
                             ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];//曲のBPMを指定
@@ -88,8 +90,7 @@ class _PlayPageState extends State<PlayPage> {
               ),
             ),
 
-            Flexible(
-              //画面の下にある再生バー的なやつ。一曲目が再生されるまで表示されない
+            SizedBox(
               child: Visibility(//表示・非表示を切り替えられる
                 visible: visible,
                 maintainSize: true,
@@ -101,7 +102,7 @@ class _PlayPageState extends State<PlayPage> {
                   builder: (BuildContext context, snapshot){
                     return  Row(
                       children: [
-                        Expanded(child: Text(musics[playlist[player.currentIndex ?? 0]]['name'], overflow: TextOverflow.ellipsis,)),
+                        Expanded(child: Text(musics[formar_playlist[player.currentIndex ?? 0]]['name'], overflow: TextOverflow.ellipsis,)),
 
                         //原曲・走る速度切り替えボタン
                         TextButton(

@@ -43,6 +43,7 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                   Navigator.pop(context);
                   setState(() {
                     //if(comefrom == "playpage"){
+                     formar_playlist = playlist;
                       player.setSpeed(bpm_ratio);
                       playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
                       changingspeed = true;
