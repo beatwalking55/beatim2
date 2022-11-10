@@ -1,11 +1,7 @@
-// import 'dart:io';
-//
 import 'package:beatim/variables.dart';
 import 'package:flutter/material.dart';
 import 'log.dart';
 import 'musicdata.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'variables.dart';
 import 'playpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 

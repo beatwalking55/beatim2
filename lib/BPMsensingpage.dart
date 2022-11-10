@@ -42,12 +42,12 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                 if (counter == 6){
                   Navigator.pop(context);
                   setState(() {
-                    if(comefrom == "playpage"){
+                    //if(comefrom == "playpage"){
                       player.setSpeed(bpm_ratio);
                       playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
                       changingspeed = true;
                       changingspeedbutton = "原曲";
-                    }
+                    //}
                     previous_sensingBPM = sensingBPM;
                   });
                 }

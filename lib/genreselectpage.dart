@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'variables.dart';
 import 'musicdata.dart';
 import 'playpage.dart';
-import 'artistselectpage.dart';
 import 'dart:math';
 
 class MyHomePage extends StatefulWidget {

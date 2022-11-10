@@ -3,10 +3,8 @@ import 'package:beatim/variables.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:beatim/musicdata.dart';
-import 'package:beatim/variables.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'logpage.dart';
 
 class PlayPage extends StatefulWidget {
@@ -163,7 +161,7 @@ class _PlayPageState extends State<PlayPage> {
                   )
               );
               setState(() {
-                comefrom = "playpage";
+                //comefrom = "playpage";
                 previous_sensingBPM = sensingBPM;
               });
             }, child: Text("再計測")

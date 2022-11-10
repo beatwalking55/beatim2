@@ -1,6 +1,5 @@
 import 'package:beatim/variables.dart';
 import 'musicdata.dart';
-import 'variables.dart';
 
 musicselect({genre, artist, BPM}){
   int i = 0;
@@ -54,6 +53,10 @@ musicselect({genre, artist, BPM}){
   playList.addAll(playList_a2);
   playList.addAll(playList_b2);
   playList.addAll(playList_c2);
+
+  if (playList.length == 0){
+    return List.generate(musics.length, (index) => index);
+  }
 
   return playList;
 }
