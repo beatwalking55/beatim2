@@ -141,7 +141,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.3,
   },
   8: {
     'filename': "audio/Calling You (Club Edit)_BPM128.mp3",
@@ -159,7 +159,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   9: {
     'filename': "audio/Higher (Original Mix)_BPM128.mp3",
@@ -177,7 +177,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   10: {
     'filename': "audio/Fujii Kaze - Kirari_BPM117.mp3",
@@ -195,7 +195,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.3,
   },
   11: {
     'filename': "audio/King Gnu_BOY_BPM110_編集済.mp3",
@@ -213,7 +213,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.2,
   },
   12: {
     'filename': "audio/サカナクション_ミューシック_BPM136_編集済.mp3",
@@ -231,7 +231,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 0.6,
+    'beatability': 0.3,
   },
   13: {
     'filename': "audio/Vaundy_踊り子_BPM157_編集済.mp3", 
@@ -249,10 +249,10 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.3,
   },
   14: {
-    'filename': "audio/아이즈원 (IZONE)Panorama ZONE_BPM126.mp3",
+    'filename': "audio/(IZONE)Panorama ZONE_BPM126.mp3",
     'name': "아이즈원 (IZONE)Panorama ZONE_BPM126",
     'artist': "아이즈원 (IZONE)Panorama",
     'BPM': 126.0,
@@ -267,7 +267,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.2,
   },
   15: {
     'filename': "audio/Mela緑黄色社会_BPM138.mp3",
@@ -285,7 +285,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
   16: {
     'filename': "audio/YOASOBI  三原色_BPM128.mp3",
@@ -303,10 +303,10 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0,
   },
   17: {
-    'filename':"audio/BLACKPINK - 마지막처럼 (AS IF ITS YOUR LAST)BPM125.mp3",
+    'filename':"audio/BLACKPINK(AS IF ITS YOUR LAST)BPM125.mp3",
     'name': "BLACKPINK - 마지막처럼 (AS IF ITS YOUR LAST)BPM125",
     'artist': "BLACKPINK",
     'BPM': 125.0,
@@ -321,7 +321,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.3,
   },
   18: {
     'filename': "audio/showmore - 1mmOfficial Lyric Video_BPM93.mp3",
@@ -339,7 +339,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.7,
   },
   19: {
     'filename': "audio/Naked Men 見ろ裸の俺たちを_BPM127.mp3",
@@ -357,7 +357,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
   20: {
     'filename': "audio/サンフラサ中野くん_Runner_BPM124.mp3",
@@ -375,7 +375,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.7,
   },
   21: {
     'filename': "audio/Despacito_BPM150.mp3",
@@ -393,7 +393,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.3,
   },
   22: {
     'filename': "audio/Shape of You_BPM150.mp3",
@@ -411,7 +411,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.8,
   },
   23: {
     'filename': "audio/[Official Music Video] Perfume「レーサーヒーム」-K54CYowOqxM.mp3",
@@ -429,7 +429,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.7,
   },
   24: {
     'filename': "audio/【CHUNITHM AIR 音源】Philosopher _ 少女病-9y-T1DuNuSY.mp3",
@@ -447,7 +447,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.3,
   },
   25: {
     'filename': "audio/9mm Parabellum Bullet - インフェルノ-8DizBlRFMD4.mp3",
@@ -465,7 +465,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.3,
   },
   26: {
     'filename': "audio/9mm Parabellum Bullet - サクリファイス-CVNy1p3CrVM.mp3",
@@ -483,7 +483,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
   27: {
     'filename': "audio/Atarashii Hikari-uCrhhsOPav4.mp3",
@@ -501,7 +501,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.2,
   },
   28: {
     'filename': "audio/Black Market Blues-rJp9A-f5nR0.mp3",
@@ -519,7 +519,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.6,
   },
   29: {
     'filename': "audio/KANA-BOON 『フルトライフ』Music Video-adK2Fol2SkM.mp3",
@@ -537,7 +537,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.7,
   },
   30: {
     'filename': "audio/MAN WITH A MISSION 『Raise your flag』-PiQpGzYMVos.mp3",
@@ -555,7 +555,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.6,
   },
   31: {
     'filename': "audio/THE BACK HORN｢コハルトフルー｣MUSIC VIDEO-yf_xwI865gg.mp3",
@@ -573,7 +573,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.6,
   },
   32: {
     'filename': "audio/THE BACK HORN｢戦う君よ｣MUSIC VIDEO-QPdhZR_CIck.mp3",
@@ -591,7 +591,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
   33: {
     'filename': "audio/THE BACK HORN｢罠｣MUSIC VIDEO-_aw01by-hzE.mp3",
@@ -609,7 +609,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   34: {
     'filename': "audio/フレテリック「オンリーワンター」MusicVideo _ frederic“ONLYWONDER”-oCrwzN6eb4Q.mp3",
@@ -627,7 +627,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.6,
   },
   35: {
     'filename': "audio/マチカミ少女-qTrPVe3GZys.mp3",
@@ -645,7 +645,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.3,
   },
   36: {
     'filename': "audio/刃-x_FIQdFnqo8.mp3",
@@ -663,7 +663,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   37: {
     'filename': "audio/Vaundy_怪獣の花唄_BPM150_編集済.mp3",
@@ -681,7 +681,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
   38: {
     'filename': "audio/Vaundy_不可幸力_BPM94.mp3",
@@ -699,7 +699,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.2,
   },
   39: {
     'filename': "audio/Vaundy_東京フラッシュ_BPM98.mp3",
@@ -717,7 +717,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.7,
   },
   40: {
     'filename': "audio/Vaundy_恋風邪にのせて_BPM118_編集済.mp3",
@@ -735,7 +735,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
   41: {
     'filename': "audio/Vaundy_花占い_BPM135_編集済.mp3",
@@ -753,7 +753,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   42: {
     'filename': "audio/なとり_Overdose_BPM118_編集済.mp3.mp3",
@@ -771,7 +771,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.7,
   },
   43: {
     'filename': "audio/緑黄色社会_キャラクター_BPM124_編集済.mp3",
@@ -789,7 +789,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.7,
   },
   44: {
     'filename': "audio/緑黄色社会_陽はまた昇るから_BPM142_編集済.mp3",
@@ -807,7 +807,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
   45: {
     'filename': "audio/Doja Cat - Say So_BPM111.mp3",
@@ -825,10 +825,10 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.9,
   },
   46: {
-    'filename': "audio/Doja Cat_Boss Bitch_BPM126.mp3",
+    'filename': "audio/Doja Cat - Boss Bitch (Lyrics).mp3",
     'name': "Boss Bitch_BPM126",
     'artist': "Doja Cat",
     'BPM': 126.0,
@@ -843,7 +843,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.7,
   },
   47: {
     'filename': "audio/Doja Cat_Like That (feat. Gucci Mane)_BPM106.mp3",
@@ -861,7 +861,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
   48: {
     'filename': "audio/The Kid LAROI, Justin Bieber - Stay_BPM170.mp3",
@@ -879,7 +879,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.9,
   },
   49: {
     'filename': "audio/JustinBieberWhatDoYouMeanBPM125.mp3",
@@ -897,7 +897,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.3,
   },
   50: {
     'filename': "audio/Justin Bieber_Baby ft. Ludacris_BPM130.mp3",
@@ -915,7 +915,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   51: {
     'filename': "audio/Mark Ronson _Uptown Funk (feat. Bruno Mars)_BPM115.mp3",
@@ -933,7 +933,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.9,
   },
   52: {
     'filename': "audio/Official髭男dism_ミックスナッツ_BPM150_編集済.mp3",
@@ -951,7 +951,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   53: {
     'filename': "audio/Official髭男dism_Pretender_BPM92.mp3",
@@ -969,7 +969,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.1,
   },
   54: {
     'filename': "audio/Official髭男dism_Cry Baby_BPM100.mp3",
@@ -987,7 +987,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   55: {
     'filename': "audio/Official髭男dism_ノータウト_BPM150.mp3",
@@ -1005,7 +1005,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   56: {
     'filename': "audio/Official髭男dism_宿命_BPM82.mp3",
@@ -1023,7 +1023,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.1,
   },
   57: {
     'filename': "audio/Official髭男dism_イエスタテイ_BPM130.mp3",
@@ -1041,7 +1041,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.6,
   },
   58: {
     'filename': "audio/Official髭男dism_FIRE GROUND_BPM114.mp3",
@@ -1059,7 +1059,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.8,
   },
   59: {
     'filename': "audio/Official髭男dism_Stand By You_BPM154.mp3",
@@ -1077,7 +1077,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
   60: {
     'filename': "audio/Official髭男dism_115万キロのフィルム_BPM97.mp3",
@@ -1095,7 +1095,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.6,
   },
   61: {
     'filename': "audio/YOASOBI_怪物_BPM170_編集済.mp3",
@@ -1113,7 +1113,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.6,
   },
   62: {
     'filename': "audio/YOASOBI_三原色_BPM128_編集済.mp3",
@@ -1131,7 +1131,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.9,
   },
   63: {
     'filename': "audio/YOASOBI_群青_BPM135_編集済.mp3",
@@ -1149,7 +1149,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.9,
   },
   64: {
     'filename': "audio/YOASOBI_ハルシオン_BPM130_編集済.mp3",
@@ -1167,7 +1167,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.6,
   },
   65: {
     'filename': "audio/YOASOBI_あの夢をなそって_BPM180.mp3",
@@ -1185,7 +1185,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   66: {
     'filename': "audio/YOASOBI_祝福_BPM170_編集済.mp3",
@@ -1203,7 +1203,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.8,
   },
   67: {
     'filename': "audio/YOASOBI_夜に駆ける_BPM130_編集済.mp3",
@@ -1221,7 +1221,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.4,
   },
   68: {
     'filename': "audio/Ayase_シネマ feat.初音ミク_BPM124.mp3",
@@ -1239,7 +1239,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.6,
   },
   69: {
     'filename': "audio/Eve_廻廻奇譚_BPM185.mp3",
@@ -1257,7 +1257,7 @@ Map musics = {
     'bpmHalf': 0,
     'bpmNotHalf': 0,
     'bpmIntro': 0,
-    'beatability': 5,
+    'beatability': 0.5,
   },
  
 
