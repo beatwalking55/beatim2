@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 Map musics = {
   0: {
     'filename': "audio/Mrs. GREEN APPLE_Inferno_BPM185_編集済.mp3",
@@ -757,7 +756,7 @@ Map musics = {
     'beatability': 5,
   },
   42: {
-    'filename': "audio/なとり_Overdose_BPM118_編集済.mp3",
+    'filename': "audio/なとり_Overdose_BPM118_編集済.mp3.mp3",
     'name': "Overdose_BPM118",
     'artist': "なとり",
     'BPM': 118.0,
@@ -865,7 +864,7 @@ Map musics = {
     'beatability': 5,
   },
   48: {
-    'filename': "audio/The Kid LAROI, Justin Bieber_STAY_BPM170.mp3",
+    'filename': "audio/The Kid LAROI, Justin Bieber - Stay_BPM170.mp3",
     'name': "STAY_BPM170",
     'artist': "The Kid LAROI, Justin Bieber",
     'BPM': 170.0,
@@ -883,7 +882,7 @@ Map musics = {
     'beatability': 5,
   },
   49: {
-    'filename': "audio/Justin Bieber_What Do You Mean?_BPM125.mp3",
+    'filename': "audio/JustinBieberWhatDoYouMeanBPM125.mp3",
     'name': "What Do You Mean?_BPM125",
     'artist': "Justin Bieber",
     'BPM': 125.0,
