@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:beatim/artistselectpage.dart';
 import 'package:beatim/musicselectfunction.dart';
 import 'variables.dart';
 import 'musicdata.dart';

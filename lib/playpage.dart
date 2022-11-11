@@ -6,7 +6,6 @@ import 'package:beatim/musicdata.dart';
 import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
 import 'logpage.dart';
-import 'variables.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({Key? key}) : super(key: key);

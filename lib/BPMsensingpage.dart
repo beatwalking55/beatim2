@@ -2,7 +2,7 @@ import 'package:beatim/musicselectfunction.dart';
 import 'package:beatim/playpage.dart';
 import 'package:flutter/material.dart';
 import 'package:beatim/variables.dart';
-import 'package:just_audio/just_audio.dart';
+//import 'package:just_audio/just_audio.dart';
 
 class BPMSensingPage extends StatefulWidget {
   const BPMSensingPage({Key? key}) : super(key: key);
