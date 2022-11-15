@@ -1512,7 +1512,7 @@ Map musics = {
     'beatability': 0.5,
   },
   84: {
-    'filename': "audio/いきものがかり_じょいふる_BPM159.mp3",
+    'filename': "audio/いきものがかり_じょいふる_BPM159_編集済.mp3",
     'name': "いきものがかり_じょいふる_BPM159",
     'artist': "いきものがかり",
     'BPM': 159.0,
@@ -1566,7 +1566,7 @@ Map musics = {
     'beatability': 0.7,
   },
   87: {
-    'filename': "audio/Neru_ロストワンの号哭_BPM162.mp3",
+    'filename': "audio/Neru_ロストワンの号哭_BPM162_編集済.mp3",
     'name': "Neru_ロストワンの号哭_BPM162",
     'artist': "Neru",
     'BPM': 162.0,
@@ -1656,7 +1656,7 @@ Map musics = {
     'beatability': 0.7,
   },
   92: {
-    'filename': "audio/Creepy Nuts_よふかしのうた_BPM115.mp3",
+    'filename': "audio/Creepy Nuts_よふかしのうた_BPM115_編集済.mp3",
     'name': "Creepy Nuts_よふかしのうた_BPM115",
     'artist': "Creepy Nuts",
     'BPM': 115.0,
