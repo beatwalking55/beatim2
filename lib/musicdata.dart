@@ -1274,7 +1274,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   71: {
@@ -1292,7 +1292,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   72: {
@@ -1310,7 +1310,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   73: {
@@ -1328,7 +1328,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.7,
   },
   74: {
@@ -1346,7 +1346,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   75: {
@@ -1364,7 +1364,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   76: {
@@ -1382,7 +1382,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.4,
   },
   77: {
@@ -1400,7 +1400,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   78: {
@@ -1418,7 +1418,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   79: {
@@ -1436,7 +1436,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   80: {
@@ -1454,7 +1454,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   81: {
@@ -1472,7 +1472,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   82: {
@@ -1490,7 +1490,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   83: {
@@ -1508,7 +1508,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   84: {
@@ -1526,7 +1526,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.8,
   },
   85: {
@@ -1544,7 +1544,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   86: {
@@ -1562,7 +1562,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.7,
   },
   87: {
@@ -1580,7 +1580,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.8,
   },
   88: {
@@ -1598,7 +1598,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.6,
   },
   89: {
@@ -1616,7 +1616,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   90: {
@@ -1634,7 +1634,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   91: {
@@ -1652,7 +1652,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.7,
   },
   92: {
@@ -1670,7 +1670,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.4,
   },
   93: {
@@ -1688,7 +1688,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   94: {
@@ -1706,7 +1706,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   95: {
@@ -1724,7 +1724,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   96: {
@@ -1742,7 +1742,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.6,
   },
   97: {
@@ -1760,7 +1760,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   98: {
@@ -1778,7 +1778,7 @@ Map musics = {
     'waltz': 0,
     'bpmHalf': 0,
     'bpmNotHalf': 0,
-    'bpmIntro': 0
+    'bpmIntro': 0,
     'beatability': 0.5,
   },
   
