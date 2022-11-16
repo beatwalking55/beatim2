@@ -2,7 +2,8 @@ import 'package:beatim/musicselectfunction.dart';
 import 'package:beatim/playpage.dart';
 import 'package:flutter/material.dart';
 import 'package:beatim/variables.dart';
-//import 'package:just_audio/just_audio.dart';
+import 'package:just_audio/just_audio.dart';
+import 'musicdata.dart';
 
 class BPMSensingPage extends StatefulWidget {
   const BPMSensingPage({Key? key}) : super(key: key);
@@ -40,17 +41,21 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                 print(bpm_ratio);
                 counter += 1;
                 if (counter == 6){
-                  Navigator.pop(context);
                   setState(() {
-                    //if(comefrom == "playpage"){
-                     formar_playlist = playlist;
-                      player.setSpeed(bpm_ratio);
-                      playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
-                      changingspeed = true;
-                      changingspeedbutton = "原曲";
-                    //}
+                    playlist = musicselect(genre:genre, artist: artist, BPM: sensingBPM);
+                    changingspeed = true;
+                    changingspeedbutton = "原曲";
+                    newplaylist = ConcatenatingAudioSource(
+                      children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+                    );
+                    player.setSpeed(bpm_ratio);
                     previous_sensingBPM = sensingBPM;
-                  });
+                  }
+                  );
+                  player.setLoopMode(LoopMode.all);//ループ再生on
+                  player.setAudioSource(newplaylist,initialIndex: 0,initialPosition: Duration.zero);//index番目の曲をplayerにセット
+                  player.play();
+                  Navigator.pop(context);
                 }
               },
           

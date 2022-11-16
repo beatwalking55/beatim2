@@ -61,12 +61,10 @@ class _PlayPageState extends State<PlayPage> {
                         label: Text(musics[playlist[index]]['name']),//曲名
                         onPressed: () {
                           //タップされた時の処理
-                          //プレイリストを生成（消すと再計測時にバグる）（できればこの部分消したい）
-                          ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
-                            children:List.generate(playlist.length, (index) => AudioSource.uri(Uri.parse('asset:${musics[playlist[index]]['filename']}'))),
-                          );
                           setState(() {
-                            formar_playlist = playlist;
+                            newplaylist = ConcatenatingAudioSource(
+                              children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+                            );
                             visible = true;//下の再生バーを表示する
                             music = musics[playlist[index]]['filename'];//曲のファイル名を指定
                             ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];//曲のBPMを指定
@@ -101,7 +99,7 @@ class _PlayPageState extends State<PlayPage> {
                   builder: (BuildContext context, snapshot){
                     return  Row(
                       children: [
-                        Expanded(child: Text(musics[formar_playlist[player.currentIndex ?? 0]]['name'], overflow: TextOverflow.ellipsis,)),
+                        Expanded(child: Text(musics[playlist[player.currentIndex ?? 0]]['name'], overflow: TextOverflow.ellipsis,)),
 
                         //原曲・走る速度切り替えボタン
                         TextButton(
