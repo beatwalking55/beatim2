@@ -6,14 +6,33 @@ musicselect({genre, artist, BPM}) {
   List<int> playList = []; //再生リストの曲IDのみを収納
   const _min_BPMratio = 0.95;  //再生倍率の最小値
   const _max_BPMratio = 1.3;  //再生倍率の最大値
-  
+
   //musicID番目の曲の評価値を返す関数
   //評価値はいい曲ほど高い
   double _evaluate(musicID){
-    return musics[musicID]['beatability'].toDouble();
+
+    //各パラメータを正規化する。double型にしておく。
+    //beatabilityの正規化。そのまま。
+    double _normalized_beatability = musics[musicID]['beatability'].toDouble();
+    //bpmratioの正規化。とりあえずグラフを直線で結んだ形にした。
+    double _bpm_ratio = BPM/musics[musicID]["BPM"];
+    double _normalized_bpmratio = 0;
+    if(_bpm_ratio<0.95){
+      _normalized_bpmratio = (0.5/0.95)*_bpm_ratio;
+    }else if(_bpm_ratio>=0.95 && _bpm_ratio<=1.0){
+      _normalized_bpmratio = 10.0*_bpm_ratio - 9.0;
+    }else if (_bpm_ratio > 1.0 && _bpm_ratio <= 1.3){
+      _normalized_bpmratio = (-5/3)*_bpm_ratio + 8/3;
+    }else{
+      _normalized_bpmratio = 0;
+    }
+
+    //各パラメータの重みづけ。最後の一つは1-(他のパラメータの重み付け)にする。
+    double _beatability_weight = 0.5;
+    double _bpmratio_weight = 1-_beatability_weight;
+
+    return _beatability_weight*_normalized_beatability + _bpmratio_weight*_normalized_bpmratio;//型に注意
   };
-
-
 
 
   //おまかせ（ジャンルフリー、アーティストフリー）の場合
@@ -61,7 +80,7 @@ musicselect({genre, artist, BPM}) {
             musics[i]['genre2'].toString() == genre) {
           playList_a.add([i, -_evaluate(i)]);//評価値は昇順でソートするためマイナスをかけている
         } else {
-          playList_b.add([i, (BPM - musics[i]['BPM']).abs()]);
+          playList_b.add([i, -_evaluate(i)]);
         }
       }
     }
@@ -111,7 +130,7 @@ musicselect({genre, artist, BPM}) {
         if (musics[i]['artist'] == artist) {
           playList_a.add([i, -_evaluate(i)]);//評価値は昇順でソートするためマイナスをかけている
         } else {
-          playList_b.add([i, (BPM - musics[i]['BPM']).abs()]);
+          playList_b.add([i, -_evaluate(i)]);
         }
       }
     }

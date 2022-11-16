@@ -1,3 +1,4 @@
+import 'package:beatim/BPMselectpage.dart';
 import 'package:beatim/artistselectpage.dart';
 import 'package:beatim/genreselectpage.dart';
 import 'package:beatim/musicselectfunction.dart';
@@ -48,9 +49,8 @@ class _MyHomePageState extends State<MyHomePage> {
               setState(() {
                 genre = "free";
                 artist = "free";
-                playlist = musicselect(genre: genre,artist:artist,BPM: previous_sensingBPM);
               });
-              Navigator.push(context, MaterialPageRoute(builder: (context) => PlayPage()));
+              Navigator.push(context, MaterialPageRoute(builder: (context) => BPMSelectPage()));
             }, child: Text("おまかせ")),
             TextButton(
                 onPressed:(){

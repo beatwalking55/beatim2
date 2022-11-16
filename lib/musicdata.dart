@@ -1584,7 +1584,7 @@ Map musics = {
     'beatability': 0.8,
   },
   88: {
-    'filename': "audio/Neru_脱法ロック_BPM155.mp3",
+    'filename': "audio/Neru_ロストワンの号哭_BPM162_編集済.mp3",
     'name': "Neru_脱法ロック_BPM155",
     'artist': "Neru",
     'BPM': 155.0,

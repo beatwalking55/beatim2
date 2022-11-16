@@ -1,3 +1,4 @@
+import 'package:beatim/BPMselectpage.dart';
 import 'package:beatim/musicselectfunction.dart';
 import 'package:beatim/playpage.dart';
 import 'package:flutter/material.dart';
@@ -43,11 +44,10 @@ class _artistselectState extends State<ArtistSelectPage> {
                  itemBuilder: (BuildContext context,int index){
                    return Container(
                      child: TextButton(onPressed: (){
-                       Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
+                       Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSelectPage()));
                        setState(() {
                          genre = "free";
                          artist = artistList[index];
-                         playlist = musicselect(genre: genre, artist: artist,BPM: previous_sensingBPM);
                        });
                      }, child: Text(artistList[index]),
                      ),
