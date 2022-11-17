@@ -159,7 +159,7 @@ class _PlayPageState extends State<PlayPage> {
                   )
               );
               setState(() {
-                //comefrom = "playpage";
+                comefrom = "playpage";
                 previous_sensingBPM = sensingBPM;
               });
             }, child: Text("再計測")
