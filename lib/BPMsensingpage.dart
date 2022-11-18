@@ -48,13 +48,14 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                     newplaylist = ConcatenatingAudioSource(
                       children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
                     );
-                    player.setSpeed(bpm_ratio);
                     previous_sensingBPM = sensingBPM;
+                    bpm_ratio = sensingBPM/musics[playlist[0]]['BPM'];
                   }
                   );
                   player.setLoopMode(LoopMode.all);//ループ再生on
                   player.setAudioSource(newplaylist,initialIndex: 0,initialPosition: Duration.zero);//index番目の曲をplayerにセット
                   player.play();
+                  player.setSpeed(bpm_ratio);
                   Navigator.pop(context);
                 }
               },

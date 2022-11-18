@@ -140,6 +140,8 @@ class _PlayPageState extends State<PlayPage> {
                               setState(() {
 
                               });
+                              bpm_ratio = sensingBPM / musics[playlist[player.currentIndex ?? 0]];
+                              player.setSpeed(bpm_ratio);
                             },
                             icon: Icon(Icons.fast_forward))
                       ],
