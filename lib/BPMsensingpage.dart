@@ -38,7 +38,6 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                   sensingBPM = 60.0 / (ave_dul / 1000);
                 });
                 bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
-                print(bpm_ratio);
                 counter += 1;
                 if (counter == 6){
                   setState(() {
@@ -48,32 +47,23 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                     newplaylist = ConcatenatingAudioSource(
                       children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
                     );
-                    player.setSpeed(bpm_ratio);
                     previous_sensingBPM = sensingBPM;
                   }
                   );
-                  player.setLoopMode(LoopMode.all);//ループ再生on
-                  player.setAudioSource(newplaylist,initialIndex: 0,initialPosition: Duration.zero);//index番目の曲をplayerにセット
-                  player.play();
-                  Navigator.pop(context);
+                  if(comefrom == "playpage"){
+                    player.pause();
+                    player.setLoopMode(LoopMode.all);//ループ再生on
+                    player.setAudioSource(newplaylist,initialIndex: 0,initialPosition: Duration.zero);//index番目の曲をplayerにセット
+                    player.play();
+                    player.setSpeed(sensingBPM/musics[playlist[0]]['BPM']);
+                    bpm_ratio = sensingBPM/musics[playlist[0]]['BPM'];
+                    Navigator.pop(context);
+                  }else{
+                    bpm_ratio = sensingBPM/musics[playlist[0]]['BPM'];
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PlayPage()));
+                  }
                 }
               },
-          
-
-            //ElevatedButton(
-              //child: const Text('Tap!'),
-              //style: ElevatedButton.styleFrom(
-                //primary: Colors.white,
-                //onPrimary: Colors.black,
-                //shape: const CircleBorder(
-                  //side: BorderSide(
-                    //color: Colors.black,
-                    //width: 1,
-                    //style: BorderStyle.solid,
-                  //),
-                //),
-              //),
-
 
         child: Stack(
           alignment: Alignment.center,

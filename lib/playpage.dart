@@ -69,7 +69,7 @@ class _PlayPageState extends State<PlayPage> {
                             music = musics[playlist[index]]['filename'];//曲のファイル名を指定
                             ORIGINAL_musicBPM = musics[playlist[index]]['BPM'];//曲のBPMを指定
                             bpm_ratio = sensingBPM / ORIGINAL_musicBPM;//再生スピードを指定
-                            player.setSpeed(bpm_ratio);//再生スピードを設定・
+                            player.setSpeed(sensingBPM/ORIGINAL_musicBPM);//再生スピードを設定・
                             changingspeed = true;//変速していることを示す
                             changingspeedbutton = "原曲";//再生バーの表示を変更（最初は走る速度で再生するから、「原曲」ボタンになる）
                             _playericon = Icons.pause;//再生バーのアイコン(再生時には「停止」マークになる)
@@ -110,7 +110,7 @@ class _PlayPageState extends State<PlayPage> {
                                 changingspeedbutton = "走速";
                               }else{
                                 changingspeed = true;
-                                player.setSpeed(bpm_ratio);
+                                player.setSpeed(sensingBPM/musics[playlist[player.currentIndex ?? 0]]['BPM']);
                                 changingspeedbutton = "原曲";
                               }
                             });},
@@ -152,6 +152,7 @@ class _PlayPageState extends State<PlayPage> {
             //BPMを再計測するページに行くボタン。
             TextButton(
               onPressed: () async {
+                comefrom = "playpage";
               // player.pause();
               await Navigator.of(context).push(
                 MaterialPageRoute(
@@ -159,7 +160,6 @@ class _PlayPageState extends State<PlayPage> {
                   )
               );
               setState(() {
-                comefrom = "playpage";
                 previous_sensingBPM = sensingBPM;
               });
             }, child: Text("再計測")
