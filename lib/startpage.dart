@@ -39,29 +39,55 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
-        title: Text("スタートページ"),
+        title: Text("スタートページ",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children:<Widget> [
-            TextButton(onPressed: (){
-              setState(() {
-                genre = "free";
-                artist = "free";
-              });
-              Navigator.push(context, MaterialPageRoute(builder: (context) => BPMSelectPage()));
-            }, child: Text("おまかせ")),
-            TextButton(
-                onPressed:(){
+            SizedBox(
+              width:MediaQuery.of(context).size.width * 0.9,
+              child: ElevatedButton(
+                onPressed: (){
+                  setState(() {
+                    genre = "free";
+                    artist = "free";
+                  });
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => BPMSelectPage()));
+                }, 
+                child: Text("おまかせ",style: TextStyle(fontSize: 30),)
+                ),
+            ),
+
+            //中間にある隙間。
+            SizedBox(
+              height: 50,
+            ),
+
+            SizedBox(
+              width:MediaQuery.of(context).size.width * 0.9,
+              child: ElevatedButton(
+                onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => genreselectpage()));
-                },
-                 child: Text("ジャンルから選ぶ")),
-            TextButton(
+                }, 
+                child: Text("ジャンルから選ぶ",style: TextStyle(fontSize: 30),)
+                ),
+            ),
+
+            //中間にある隙間。
+            SizedBox(
+              height: 50,
+            ),
+
+            SizedBox(
+              width:MediaQuery.of(context).size.width * 0.9,
+              child: ElevatedButton(
                 onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (context) => ArtistSelectPage()));
-                },
-                child: Text("アーティストから選ぶ")),
+                }, 
+                child: Text("アーティストから選ぶ",style: TextStyle(fontSize: 30),)
+                ),
+            ),
           ],
         ),
       )

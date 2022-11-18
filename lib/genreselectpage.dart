@@ -20,7 +20,7 @@ class _genreselectpageState extends State<genreselectpage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("好きなジャンルを選んでね"),
+        title: Text("好きなジャンルを選んでね",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Center(
         child: Column(
@@ -37,7 +37,7 @@ class _genreselectpageState extends State<genreselectpage> {
                         genre = genreList[index];
                         artist = "free";
                       });
-                    }, child: Text(genreList[index])
+                    }, child: Text(genreList[index],style: TextStyle(fontSize: 30),)
                     ),
                   );
                 },

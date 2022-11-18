@@ -14,11 +14,10 @@ class BPMSelectPage extends StatefulWidget {
 
 class _BPMSelectPageState extends State<BPMSelectPage> {
   @override
-
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BPMを設定してね"),
+        title: Text("BPMを設定してね",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Center(
         child: Column(
@@ -30,18 +29,11 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Text(
-                    "バーでBPM調整",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  Text(
                     "BPM:${sensingBPM.toStringAsFixed(1)}",
                     style: TextStyle(fontSize: 30),
                   ), //ランニングペースからBPMを計算して表示
                   Transform.rotate(
-                    angle: 0, 
+                    angle: 0,
                     child: Slider(
                         inactiveColor: Colors.blue.shade50, //左側の色
                         activeColor: Colors.blue, //右側の色
@@ -56,7 +48,9 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                         }),
                   ),
                   //計算したBPMを設定してplaypageに行くボタン。
-                  ElevatedButton(
+                  SizedBox(
+                    width:MediaQuery.of(context).size.width * 0.9,
+                    child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                             context,
@@ -72,7 +66,9 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                       child: Text(
                         "このBPMで走る",
                         style: TextStyle(fontSize: 30),
-                      )),
+                      )
+                    ),
+                  )
                 ],
               ),
             ),
@@ -87,58 +83,61 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text(
-                    "前回のBPMで再開",
-                    style: TextStyle(fontSize: 20),
-                  ),
                   SizedBox(
-                    height: 10,
-                  ),
-
-                  //前回のBPMを選ぶボタン
-                  TextButton(
+                    width:MediaQuery.of(context).size.width * 0.9,
+                    child: ElevatedButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PlayPage()));
                         setState(() {
-                          sensingBPM = previous_sensingBPM;
+                          sensingBPM = sensingBPM;
+                          previous_sensingBPM = previous_sensingBPM;
                         });
                         playlist = musicselect(
                             genre: genre, artist: artist, BPM: sensingBPM);
                       },
-                      child: Text("前回(${previous_sensingBPM})")),
+                      child: Text(
+                        "前回のBPM:${previous_sensingBPM.toStringAsFixed(1)}で走る",
+                        style: TextStyle(fontSize: 30),
+                      )
+                    ),
+                  )
                 ],
               ),
+            ),
+
+            //中間にある隙間。
+            SizedBox(
+              height: 50,
             ),
 
             // BPMを新規計測する部分。
             Container(
               child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Text(
-                    "タップでBPM計測",
-                    style: TextStyle(fontSize: 20),
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                  TextButton(
-                    onPressed: () async {
-                      setState(() {
-                        comefrom = "bpmselectpage";
-                        previous_sensingBPM = sensingBPM;
-                      });
-                      // player.pause();
-                      await Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => BPMSensingPage()));
-                      setState(() {});
-                    },
-                    child: Text("新しく登録（計測ページへ）")
-                  ),
-                ]
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      width:MediaQuery.of(context).size.width * 0.9,
+                      child: ElevatedButton(
+                        onPressed: () async {
+                          setState(() {
+                            comefrom = "bpmselectpage";
+                            previous_sensingBPM = sensingBPM;
+                          });
+                          // player.pause();
+                          await Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => BPMSensingPage()));
+                          setState(() {});
+                        },
+                        child: Text(
+                          "タップでBPM設定",
+                          style: TextStyle(fontSize: 30),
+                          )
+                        ),
+                      )
+                  ]
               ),
             )
           ],

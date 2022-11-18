@@ -38,7 +38,7 @@ class _PlayPageState extends State<PlayPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("好きな曲を再生しよう"),
+        title: Text("好きな曲を再生しよう",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Center(
         child: Column(
@@ -53,12 +53,12 @@ class _PlayPageState extends State<PlayPage> {
                 itemCount: playlist.length,
                 itemBuilder: (BuildContext context, int index){
                   return Container(
-                    alignment:Alignment.centerLeft,
+                    alignment: Alignment.center,
                     child: Container(
-                      width:double.infinity,
-                      child:ElevatedButton.icon(
-                        icon: Icon(Icons.play_arrow),//再生マーク
-                        label: Text(musics[playlist[index]]['name']),//曲名
+                      width:MediaQuery.of(context).size.width * 0.9,
+                      child:ElevatedButton(
+                        // icon: Icon(Icons.play_arrow),//再生マーク
+                        child: Text(musics[playlist[index]]['name']),//曲名
                         onPressed: () {
                           //タップされた時の処理
                           setState(() {
@@ -99,7 +99,7 @@ class _PlayPageState extends State<PlayPage> {
                   builder: (BuildContext context, snapshot){
                     return  Row(
                       children: [
-                        Expanded(child: Text(musics[playlist[player.currentIndex ?? 0]]['name'], overflow: TextOverflow.ellipsis,)),
+                        Expanded(child: Text(musics[playlist[player.currentIndex ?? 0]]['name'], overflow: TextOverflow.ellipsis,style: TextStyle(fontSize: 20),)),
 
                         //原曲・走る速度切り替えボタン
                         TextButton(
@@ -164,7 +164,7 @@ class _PlayPageState extends State<PlayPage> {
               setState(() {
                 previous_sensingBPM = sensingBPM;
               });
-            }, child: Text("再計測")
+            }, child: Text("再計測",style: TextStyle(fontSize: 20),)
             ),
             //曲IDとBPMを表示する。
             // Flexible(
@@ -210,7 +210,7 @@ class _PlayPageState extends State<PlayPage> {
                          builder:(context) => logpage()
                      )
                  );
-               }, child: Text("評価ページへ")
+               }, child: Text("評価ページへ",style: TextStyle(fontSize: 20),)
                ),
              ),
             SizedBox(height: 15,)

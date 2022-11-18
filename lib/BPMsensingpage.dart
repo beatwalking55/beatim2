@@ -18,7 +18,7 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BPMを計測しよう"),
+        title: Text("BPMを計測しよう",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body:         Container(
         width:  double.infinity,
@@ -74,8 +74,8 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
         top: 300.0,
             child: Column(
               children: [
-                Text("走るリズムに合わせて画面をタップ"),
-                Text("BPM:${sensingBPM}"),
+                Text("走るリズムに合わせて\n画面を6回タップ",style: TextStyle(fontSize: 30),),
+                Text("BPM:${sensingBPM}",style: TextStyle(fontSize: 30),),
               ],
             ),
           ),  

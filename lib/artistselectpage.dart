@@ -31,7 +31,7 @@ class _artistselectState extends State<ArtistSelectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("好きなアーティストを選んでね"),
+        title: Text("好きなアーティストを選んでね",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Center(
         child: Column(
@@ -49,16 +49,16 @@ class _artistselectState extends State<ArtistSelectPage> {
                          genre = "free";
                          artist = artistList[index];
                        });
-                     }, child: Text(artistList[index]),
+                     }, child: Text(artistList[index],style: TextStyle(fontSize: 30),),
                      ),
                    );
                  },
                ),
            ),
-           TextButton(onPressed: (){
-             Navigator.pop(context);
-           }, child: Text("ジャンル選択画面にもどる")
-           ),
+          //  TextButton(onPressed: (){
+          //    Navigator.pop(context);
+          //  }, child: Text("ジャンル選択画面にもどる")
+          //  ),
           ],
         ),
       ),
