@@ -28,7 +28,7 @@ musicselect({genre, artist, BPM}) {
     }
 
     //各パラメータの重みづけ。最後の一つは1-(他のパラメータの重み付け)にする。
-    double _beatability_weight = 0.5;
+    double _beatability_weight = 0.5;//ここの数字を上げると、beatabilityが高い曲がプレイリスト上位に出てくる。逆にこの数字を下げると、BPMが近い曲がプレイリスト上位に出てくる。
     double _bpmratio_weight = 1-_beatability_weight;
 
     return _beatability_weight*_normalized_beatability + _bpmratio_weight*_normalized_bpmratio;//型に注意
@@ -80,7 +80,7 @@ musicselect({genre, artist, BPM}) {
             musics[i]['genre2'].toString() == genre) {
           playList_a.add([i, -_evaluate(i)]);//評価値は昇順でソートするためマイナスをかけている
         } else {
-          playList_b.add([i, -_evaluate(i)]);
+          playList_b.add([i, -_evaluate(i)]);//評価値は昇順でソートするためマイナスをかけている
         }
       }
     }
