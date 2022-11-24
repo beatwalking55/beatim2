@@ -48,6 +48,9 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                       children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
                     );
                     previous_sensingBPM = sensingBPM;
+                    setState(() {
+                      counter = 0;
+                    });
                   }
                   );
                   if(comefrom == "playpage"){
@@ -57,9 +60,11 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                     player.play();
                     player.setSpeed(sensingBPM/musics[playlist[0]]['BPM']);
                     bpm_ratio = sensingBPM/musics[playlist[0]]['BPM'];
+                    comefrom = "BPMsensingpage";
                     Navigator.pop(context);
                   }else{
                     bpm_ratio = sensingBPM/musics[playlist[0]]['BPM'];
+                    comefrom = "BPMsensingpage";
                     Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PlayPage()));
                   }
                 }

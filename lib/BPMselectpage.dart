@@ -39,8 +39,8 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                         activeColor: Colors.blue, //右側の色
                         thumbColor: Colors.blue, //バーの丸いやつの色
                         value: sensingBPM, //バーの初期値を設定
-                        min: 80,
-                        max: 200,
+                        min: min(80, previous_sensingBPM),//最小値
+                        max: max(200, previous_sensingBPM),//最大値
                         onChanged: (value) {
                           setState(() {
                             sensingBPM = value;
@@ -51,17 +51,20 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                   SizedBox(
                     width:MediaQuery.of(context).size.width * 0.9,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
+                      onPressed: () async{
+                        setState(() {
+                          sensingBPM = sensingBPM;
+                          previous_sensingBPM = sensingBPM;
+                        });
+                        playlist = musicselect(
+                            genre: genre, artist: artist, BPM: sensingBPM);
+                        await Navigator.push(
                             context,
                             MaterialPageRoute(
                                 builder: (context) => PlayPage()));
                         setState(() {
-                          sensingBPM = sensingBPM;
-                          previous_sensingBPM = previous_sensingBPM;
+                          
                         });
-                        playlist = musicselect(
-                            genre: genre, artist: artist, BPM: sensingBPM);
                       },
                       child: Text(
                         "このBPMで走る",
@@ -86,17 +89,20 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                   SizedBox(
                     width:MediaQuery.of(context).size.width * 0.9,
                     child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => PlayPage()));
+                      onPressed: () async{
                         setState(() {
                           sensingBPM = sensingBPM;
                           previous_sensingBPM = previous_sensingBPM;
                         });
                         playlist = musicselect(
                             genre: genre, artist: artist, BPM: sensingBPM);
+                        await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => PlayPage()));
+                        setState(() {
+
+                        });
                       },
                       child: Text(
                         "前回のBPM:${previous_sensingBPM.toStringAsFixed(1)}で走る",
@@ -129,7 +135,9 @@ class _BPMSelectPageState extends State<BPMSelectPage> {
                           // player.pause();
                           await Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => BPMSensingPage()));
-                          setState(() {});
+                          setState(() {
+
+                          });
                         },
                         child: Text(
                           "タップでBPM設定",
