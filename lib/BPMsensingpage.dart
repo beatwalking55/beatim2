@@ -19,10 +19,12 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("BPMを計測しよう",style: TextStyle(fontWeight: FontWeight.bold),),
+        backgroundColor: Colors.black,
       ),
-      body:         Container(
+      body:Container(
         width:  double.infinity,
         height:  double.infinity,
+      color: Colors.black,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
               onTap: () {
@@ -79,8 +81,8 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
         top: 300.0,
             child: Column(
               children: [
-                Text("走るリズムに合わせて\n画面を6回タップ",style: TextStyle(fontSize: 30),),
-                Text("BPM:${sensingBPM}",style: TextStyle(fontSize: 30),),
+                Text("走るリズムに合わせて\n画面を6回タップ",style: TextStyle(fontSize: 30, color: Colors.white),),
+                Text("BPM:${sensingBPM}",style: TextStyle(fontSize: 30, color: Colors.white),),
               ],
             ),
           ),  

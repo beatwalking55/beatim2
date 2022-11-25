@@ -31,35 +31,53 @@ class _artistselectState extends State<ArtistSelectPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("好きなアーティストを選んでね",style: TextStyle(fontWeight: FontWeight.bold),),
+        backgroundColor: Colors.black,
+        title: Text("好きなアーティストを選択",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:<Widget> [
-            //アーティスト一覧。
-           Flexible(
-               child: ListView.builder(
-                 itemCount: artistList.length,
-                 itemBuilder: (BuildContext context,int index){
-                   return Container(
-                     child: TextButton(onPressed: (){
-                       Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSelectPage()));
-                       setState(() {
-                         genre = "free";
-                         artist = artistList[index];
-                       });
-                     }, child: Text(artistList[index],style: TextStyle(fontSize: 30),),
-                     ),
-                   );
-                 },
-               ),
-           ),
-          //  TextButton(onPressed: (){
-          //    Navigator.pop(context);
-          //  }, child: Text("ジャンル選択画面にもどる")
-          //  ),
-          ],
+      body: Container(
+        color: Colors.black,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:<Widget> [
+              //アーティスト一覧。
+             Flexible(
+                 child: ListView.builder(
+                   itemCount: artistList.length,
+                   itemBuilder: (BuildContext context,int index){
+                     return Container(
+                       decoration: BoxDecoration(
+                         color: Colors.black,
+                         border:Border(
+                           bottom: const BorderSide(color: Colors.white30),//ボタンの下のみにボーダーラインを設定
+                         ),
+                       ),
+                       child: Padding(
+                         padding: const EdgeInsets.all(2.0),
+                         child: ElevatedButton(
+                           style: ElevatedButton.styleFrom(
+                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),//ボタンの角をつける
+                             backgroundColor: Colors.black,//ボタンの背景色
+                           ),
+                           onPressed: (){
+                            Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSelectPage()));
+                            setState(() {
+                              genre = "free";
+                              artist = artistList[index];
+                            });
+                         }, child: Text(artistList[index],style: TextStyle(fontSize: 30,color: Colors.white),),
+                         ),
+                       ),
+                     );
+                   },
+                 ),
+             ),
+            //  TextButton(onPressed: (){
+            //    Navigator.pop(context);
+            //  }, child: Text("ジャンル選択画面にもどる")
+            //  ),
+            ],
+          ),
         ),
       ),
     );

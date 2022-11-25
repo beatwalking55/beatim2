@@ -39,56 +39,75 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: Text("スタートページ",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children:<Widget> [
-            SizedBox(
-              width:MediaQuery.of(context).size.width * 0.9,
-              child: ElevatedButton(
-                onPressed: (){
-                  setState(() {
-                    genre = "free";
-                    artist = "free";
-                  });
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => BPMSelectPage()));
-                }, 
-                child: Text("おまかせ",style: TextStyle(fontSize: 30),)
-                ),
-            ),
+      body: Container(
+        color: Colors.black,
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children:<Widget> [
+              Container(
+                color: Colors.black,
+                width: double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),//ボタンの角をつける
+                    backgroundColor: Colors.black,//ボタンの背景色
+                  ),
+                  onPressed: (){
+                    setState(() {
+                      genre = "free";
+                      artist = "free";
+                    });
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => BPMSelectPage()));
+                  },
+                  child: Text("おまかせ",style: TextStyle(fontSize: 30),)
+                  ),
+              ),
 
-            //中間にある隙間。
-            SizedBox(
-              height: 50,
-            ),
+              //中間にある隙間。
+              SizedBox(
+                height: 50,
+              ),
 
-            SizedBox(
-              width:MediaQuery.of(context).size.width * 0.9,
-              child: ElevatedButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => genreselectpage()));
-                }, 
-                child: Text("ジャンルから選ぶ",style: TextStyle(fontSize: 30),)
-                ),
-            ),
+              Container(
+                color: Colors.black,
+                width:double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),//ボタンの角をつける
+                    backgroundColor: Colors.black,//ボタンの背景色
+                  ),
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => genreselectpage()));
+                  },
+                  child: Text("ジャンルから選ぶ",style: TextStyle(fontSize: 30),)
+                  ),
+              ),
 
-            //中間にある隙間。
-            SizedBox(
-              height: 50,
-            ),
+              //中間にある隙間。
+              SizedBox(
+                height: 50,
+              ),
 
-            SizedBox(
-              width:MediaQuery.of(context).size.width * 0.9,
-              child: ElevatedButton(
-                onPressed: (){
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => ArtistSelectPage()));
-                }, 
-                child: Text("アーティストから選ぶ",style: TextStyle(fontSize: 30),)
-                ),
-            ),
-          ],
+              Container(
+                color: Colors.black,
+                width:double.infinity,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(0)),//ボタンの角をつける
+                    backgroundColor: Colors.black,//ボタンの背景色
+                  ),
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => ArtistSelectPage()));
+                  },
+                  child: Text("アーティストから選ぶ",style: TextStyle(fontSize: 30),)
+                  ),
+              ),
+            ],
+          ),
         ),
       )
     );
