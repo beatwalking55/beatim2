@@ -1,5 +1,6 @@
 import 'package:beatim/variables.dart';
 import 'musicdata.dart';
+import 'dart:math';
 
 musicselect({genre, artist, BPM}) {
   int i = 0;
@@ -27,11 +28,15 @@ musicselect({genre, artist, BPM}) {
       _normalized_bpmratio = 0;
     }
 
-    //各パラメータの重みづけ。最後の一つは1-(他のパラメータの重み付け)にする。
-    double _beatability_weight = 0.5;//ここの数字を上げると、beatabilityが高い曲がプレイリスト上位に出てくる。逆にこの数字を下げると、BPMが近い曲がプレイリスト上位に出てくる。
-    double _bpmratio_weight = 1-_beatability_weight;
+    //ランダム要素。0~1の値を適当にとる
+    double _normalized_random = Random().nextDouble();
 
-    return _beatability_weight*_normalized_beatability + _bpmratio_weight*_normalized_bpmratio;//型に注意
+    //各パラメータの重みづけ。最後の一つは1-(他のパラメータの重み付け)にする。
+    double _beatability_weight = 0.45;//ここの数字を上げると、beatabilityが高い曲がプレイリスト上位に出てくる。逆にこの数字を下げると、BPMが近い曲がプレイリスト上位に出てくる。
+    double _bpmratio_weight = 0.45;
+    double _random_weight = 1-_beatability_weight - _bpmratio_weight;
+
+    return _beatability_weight*_normalized_beatability + _bpmratio_weight*_normalized_bpmratio + _normalized_random*_random_weight;//型に注意
   };
 
 
