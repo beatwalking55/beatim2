@@ -18,11 +18,13 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("BPMを計測しよう"),
+        title: Text("BPMを計測しよう",style: TextStyle(fontWeight: FontWeight.bold),),
+        backgroundColor: Colors.black,
       ),
-      body:         Container(
+      body:Container(
         width:  double.infinity,
         height:  double.infinity,
+      color: Colors.black,
       child: GestureDetector(
         behavior: HitTestBehavior.opaque,
               onTap: () {
@@ -38,7 +40,6 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                   sensingBPM = 60.0 / (ave_dul / 1000);
                 });
                 bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
-                print(bpm_ratio);
                 counter += 1;
                 if (counter == 6){
                   setState(() {
@@ -49,32 +50,27 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                       children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
                     );
                     previous_sensingBPM = sensingBPM;
-                    bpm_ratio = sensingBPM/musics[playlist[0]]['BPM'];
+                    setState(() {
+                      counter = 0;
+                    });
                   }
                   );
-                  player.setLoopMode(LoopMode.all);//ループ再生on
-                  player.setAudioSource(newplaylist,initialIndex: 0,initialPosition: Duration.zero);//index番目の曲をplayerにセット
-                  player.play();
-                  player.setSpeed(bpm_ratio);
-                  Navigator.pop(context);
+                  if(comefrom == "playpage"){
+                    player.pause();
+                    player.setLoopMode(LoopMode.all);//ループ再生on
+                    player.setAudioSource(newplaylist,initialIndex: 0,initialPosition: Duration.zero);//index番目の曲をplayerにセット
+                    player.play();
+                    player.setSpeed(sensingBPM/musics[playlist[0]]['BPM']);
+                    bpm_ratio = sensingBPM/musics[playlist[0]]['BPM'];
+                    comefrom = "BPMsensingpage";
+                    Navigator.pop(context);
+                  }else{
+                    bpm_ratio = sensingBPM/musics[playlist[0]]['BPM'];
+                    comefrom = "BPMsensingpage";
+                    Navigator.of(context).push(MaterialPageRoute(builder: (context)=> PlayPage()));
+                  }
                 }
               },
-          
-
-            //ElevatedButton(
-              //child: const Text('Tap!'),
-              //style: ElevatedButton.styleFrom(
-                //primary: Colors.white,
-                //onPrimary: Colors.black,
-                //shape: const CircleBorder(
-                  //side: BorderSide(
-                    //color: Colors.black,
-                    //width: 1,
-                    //style: BorderStyle.solid,
-                  //),
-                //),
-              //),
-
 
         child: Stack(
           alignment: Alignment.center,
@@ -85,8 +81,8 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
         top: 300.0,
             child: Column(
               children: [
-                Text("走るリズムに合わせて画面をタップ"),
-                Text("BPM:${sensingBPM}"),
+                Text("走るリズムに合わせて\n画面を6回タップ",style: TextStyle(fontSize: 30, color: Colors.white),),
+                Text("BPM:${sensingBPM}",style: TextStyle(fontSize: 30, color: Colors.white),),
               ],
             ),
           ),  
