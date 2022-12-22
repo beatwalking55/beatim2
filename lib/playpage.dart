@@ -368,7 +368,7 @@ class _PlayPageState extends State<PlayPage> {
                       width: 60, //幅
                       height: 60, //高さ
                       child: Text(
-                        "${counter.toStringAsFixed(0)}",
+                        "${counter.toStringAsFixed(0)}/6",
                         style: TextStyle(
                             fontSize: 25,
                             color: Colors.white),

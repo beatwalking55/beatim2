@@ -31,7 +31,7 @@ class _LinkPastePageState extends State<LinkPastePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("聞きたい音楽のmp3ファイルをgoogle driveにアップロードし、\nそのリンクを貼り付けてください。",
+              Text("1:聞きたい音楽のmp3ファイルをgoogle driveにアップロード\n2:共有設定からリンクを知っている全員に編集者権限を付与\n3:共有リンクをコピーして貼り付けてください。",
                 style: TextStyle(
                     color: Colors.black
                 ),
