@@ -1,7 +1,7 @@
 Map musics = {
   0: {
-    'filename': "audio/Mrs. GREEN APPLE_Inferno_BPM185_編集済.mp3",
-    'name': "Mrs. GREEN APPLE_Inferno_BPM185",
+    'filename': "",
+    'name': "",
     'artist': "Mrs. GREEN APPLE",
     'BPM': 185.0,
     'feltBPM':185.0,

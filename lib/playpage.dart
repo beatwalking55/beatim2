@@ -29,7 +29,7 @@ class _PlayPageState extends State<PlayPage> {
   }
   //プレイリストを最初に生成。
   ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
-    children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+    children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
   );
 
   var _playericon = Icons.play_arrow; //playpageの下の方に表示されるマーク play_arrow:再生マーク　pause:停止マーク
@@ -73,7 +73,7 @@ class _PlayPageState extends State<PlayPage> {
                           //タップされた時の処理
                           setState(() {
                             newplaylist = ConcatenatingAudioSource(
-                              children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+                              children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
                             );
                             visible = true;//下の再生バーを表示する
                             music = musics[playlist[index]]['filename'];//曲のファイル名を指定
@@ -243,7 +243,7 @@ class _PlayPageState extends State<PlayPage> {
                                   changingspeed = true;
                                   changingspeedbutton = "原曲";
                                   newplaylist = ConcatenatingAudioSource(
-                                    children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+                                    children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
                                   );
                                   previous_sensingBPM = sensingBPM;
                                   setState(() {

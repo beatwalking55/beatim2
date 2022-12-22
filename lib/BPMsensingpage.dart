@@ -47,7 +47,7 @@ class _BPMSensingPageState extends State<BPMSensingPage> {
                     changingspeed = true;
                     changingspeedbutton = "原曲";
                     newplaylist = ConcatenatingAudioSource(
-                      children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+                      children:List.generate(numberofmusics, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
                     );
                     previous_sensingBPM = sensingBPM;
                     setState(() {
