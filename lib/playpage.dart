@@ -370,6 +370,12 @@ class _PlayPageState extends State<PlayPage> {
                       //左右のバランスを取るための空箱。何か要素を入れることも可能。
                       width: 60, //幅
                       height: 60, //高さ
+                      child: Text(
+                        "${counter.toStringAsFixed(0)}",
+                        style: TextStyle(
+                            fontSize: 25,
+                            color: Colors.white),
+                      ), 
                     )
                   ],
                 ),
@@ -383,15 +389,15 @@ class _PlayPageState extends State<PlayPage> {
                       inactiveColor: Colors.blue.shade50, //左側の色
                       activeColor:  Colors.pinkAccent, //右側の色
                       thumbColor: Colors.pinkAccent, //バーの丸いやつの色
-                      value: previous_sensingBPM, //バーの初期値を設定
-                      min: min(80, previous_sensingBPM), //最小値
-                      max: max(200, previous_sensingBPM), //最大値
+                      value: sensingBPM, //バーの初期値を設定
+                      min: min(80, sensingBPM), //最小値
+                      max: max(200, sensingBPM), //最大値
                       onChanged: (value) {
                         setState(() {
                           previous_sensingBPM = sensingBPM;
                           sensingBPM = value;
-                          player
-                              .setSpeed(sensingBPM / musics[playlist[0]]['BPM']);
+                          bpm_ratio = sensingBPM / musics[playlist[0]]['BPM'];
+                          player.setSpeed(sensingBPM / musics[playlist[0]]['BPM']);
                         });
                       }),
                 ),
