@@ -290,7 +290,7 @@ class _PlayPageState extends State<PlayPage> {
                               duls[1] = duls[0];
                               duls[0] = newtime - oldtime;
                               double ave_dul =
-                                  duls.reduce((a, b) => a + b) / duls.length;
+                                  duls.length / [1/duls[0], 1/duls[1], 1/duls[2], 1/duls[3], 1/duls[4]].reduce((a, b) => a + b);
                               setState(() {
                                 sensingBPM = 60.0 / (ave_dul / 1000);
                               });
