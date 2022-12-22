@@ -31,10 +31,10 @@ class _PlayPageState extends State<PlayPage> {
 
   //プレイリストを最初に生成。
   ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
-    children: List.generate(
-        playlist.length,
-        (inde) => AudioSource.uri(
-            Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
+
+    children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
+
+
   );
 
   var _playericon =
@@ -43,11 +43,10 @@ class _PlayPageState extends State<PlayPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black, //上のバーの背景色
-        title: Text(
-          "好きな曲を再生しよう",
-          style: TextStyle(fontWeight: FontWeight.bold),
-        ), //上のバーのテキスト
+
+        backgroundColor: Colors.black,//上のバーの背景色
+        title: Text("曲を再生しよう",style: TextStyle(fontWeight: FontWeight.bold),),//上のバーのテキスト
+
       ),
       body: Container(
         color: Colors.black, //画面の背景色
@@ -88,10 +87,9 @@ class _PlayPageState extends State<PlayPage> {
                           //タップされた時の処理
                           setState(() {
                             newplaylist = ConcatenatingAudioSource(
-                              children: List.generate(
-                                  playlist.length,
-                                  (inde) => AudioSource.uri(Uri.parse(
-                                      'asset:${musics[playlist[inde]]['filename']}'))),
+
+                              children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
+
                             );
                             visible = true; //下の再生バーを表示する
                             music = musics[playlist[index]]
@@ -307,10 +305,9 @@ class _PlayPageState extends State<PlayPage> {
                                   changingspeed = true;
                                   changingspeedbutton = "原曲";
                                   newplaylist = ConcatenatingAudioSource(
-                                    children: List.generate(
-                                        playlist.length,
-                                        (inde) => AudioSource.uri(Uri.parse(
-                                            'asset:${musics[playlist[inde]]['filename']}'))),
+
+                                    children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
+
                                   );
                                   previous_sensingBPM = sensingBPM;
                                   setState(() {

@@ -1,3 +1,4 @@
+import 'package:beatim/linkpastepage.dart';
 import 'package:flutter/material.dart';
 import 'startpage.dart';
 //import 'package:just_audio_background/just_audio_background.dart';
@@ -38,7 +39,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const LinkPastePage(title: 'Flutter Demo Home Page'),
     );
     
   }

@@ -45,7 +45,7 @@ musicselect({genre, artist, BPM}) {
     List <List> playList_ = []; //評価値も収納する仮プレイリスト
 
     //BPMが計測BPMの0.9~1.3の範囲の物を選別する。
-    for (i = 0; i < musics.length; i++) {
+    for (i = 0; i < numberofmusics; i++) {
       if (musics[i]["BPM"] <= sensingBPM/_min_BPMratio && musics[i]["BPM"] >= sensingBPM/_max_BPMratio) {
         playList_.add([i, -_evaluate(i)]);//評価値は昇順でソートするためマイナスをかけている
       }
@@ -61,7 +61,7 @@ musicselect({genre, artist, BPM}) {
 
     //BPM的に合う曲がなかった時の救済
     if (playList.length == 0) {
-      return List.generate(musics.length, (index) => index);
+      return List.generate(numberofmusics, (index) => index);
     }
     return playList;
   }
@@ -77,7 +77,7 @@ musicselect({genre, artist, BPM}) {
     List<int> playLista = []; //genre一致の曲IDを収納する仮プレイリスト
     List<int> playListb = []; //genre不一致の曲IDを収納する仮プレイリスト
 
-    for (i = 0; i < musics.length; i++) {
+    for (i = 0; i < numberofmusics; i++) {
       //BPMが計測BPMの0.9~1.3の範囲の物を選別する。
       if (musics[i]["BPM"] <= sensingBPM/_min_BPMratio && musics[i]["BPM"] >= sensingBPM/_max_BPMratio) {
         //ジャンル一致のものとそうでないものに振り分ける
@@ -111,7 +111,7 @@ musicselect({genre, artist, BPM}) {
 
     //BPM的に合う曲がなかった時の救済
     if (playList.length == 0) {
-      return List.generate(musics.length, (index) => index);
+      return List.generate(numberofmusics, (index) => index);
     }
 
     return playList;
@@ -128,7 +128,7 @@ musicselect({genre, artist, BPM}) {
     List<int> playLista = []; //artist一致した曲IDを収納する仮プレイリスト
     List<int> playListb = []; //artist不一致の曲IDを収納する仮プレイリスト
 
-    for (i = 0; i < musics.length; i++) {
+    for (i = 0; i < numberofmusics; i++) {
       //BPMが計測BPMの0.9~1.3の範囲の物を選別する。
       if (musics[i]["BPM"] <= sensingBPM/_min_BPMratio && musics[i]["BPM"] >= sensingBPM/_max_BPMratio) {
         //ジャンル一致のものとそうでないものに振り分ける
@@ -161,7 +161,7 @@ musicselect({genre, artist, BPM}) {
 
     //BPM的に合う曲がなかった時の救済
     if (playList.length == 0) {
-      return List.generate(musics.length, (index) => index);
+      return List.generate(numberofmusics, (index) => index);
     }
 
     return playList;
