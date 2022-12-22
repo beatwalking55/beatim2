@@ -61,7 +61,7 @@ class _inputnamepageState extends State<inputnamepage> {
                 padding: const EdgeInsets.all(20.0),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                     side: BorderSide(
                       color: Colors.black,
                     )

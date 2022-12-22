@@ -53,7 +53,7 @@ class _LinkPastePageState extends State<LinkPastePage> {
                 child: ElevatedButton(
 
                   style: ElevatedButton.styleFrom(
-                    primary: Colors.white,
+                    backgroundColor: Colors.white,
                     side: BorderSide(
                       color: Colors.black,
                     ),
@@ -62,7 +62,9 @@ class _LinkPastePageState extends State<LinkPastePage> {
                     setState(() {
                       inputlink(link);
                     });
-                    Navigator.push(context, MaterialPageRoute(builder:(context) => inputnamepage()));
+                    if(numberofmusics > 0){
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => inputnamepage()));
+                    }
                 },
                     child: Text("次へ",style: TextStyle(fontSize: 30,color: Colors.black),)
                 ),

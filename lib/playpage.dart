@@ -38,7 +38,7 @@ class _PlayPageState extends State<PlayPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,//上のバーの背景色
-        title: Text("好きな曲を再生しよう",style: TextStyle(fontWeight: FontWeight.bold),),//上のバーのテキスト
+        title: Text("曲を再生しよう",style: TextStyle(fontWeight: FontWeight.bold),),//上のバーのテキスト
       ),
       body: Container(
         color: Colors.black,//画面の背景色
