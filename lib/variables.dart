@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:just_audio/just_audio.dart';
 import 'musicdata.dart';
 var genre = "J-POP"; //ジャンル
