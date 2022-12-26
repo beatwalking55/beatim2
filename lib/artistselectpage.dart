@@ -1,4 +1,3 @@
-import 'package:beatim/BPMselectpage.dart';
 import 'package:beatim/musicselectfunction.dart';
 import 'package:beatim/playpage.dart';
 import 'package:flutter/material.dart';
@@ -12,19 +11,6 @@ class ArtistSelectPage extends StatefulWidget {
   State<ArtistSelectPage> createState() => _artistselectState();
 }
 
-//選択されたgenreをもつartistを全て上げる。この時、返されるartistListには重複がある
-// genreatristsearch(genre){
-//   int i = 0;
-//   List<String> artistList = [];
-//   for (i = 0; i < musics.length; i++){    //musicsの長さだけiを走らせる
-//     if (musics[i]['genre1'] == genre || musics[i]['genre2'] == genre){
-//       artistList.add(musics[i]['artist']);  //もしgenre1かgenre2がgenreと一致すれば追加する。
-//     }
-//   }
-//   return artistList;
-// }
-
-
 class _artistselectState extends State<ArtistSelectPage> {
   final List artistList = List.generate(musics.length, (index) => musics[index]['artist']).toSet().toList();
   @override
@@ -32,7 +18,7 @@ class _artistselectState extends State<ArtistSelectPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("好きなアーティストを選択",style: TextStyle(fontWeight: FontWeight.bold),),
+        title: Text("アーティストを選択",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Container(
         color: Colors.black,
@@ -60,7 +46,7 @@ class _artistselectState extends State<ArtistSelectPage> {
                              backgroundColor: Colors.black,//ボタンの背景色
                            ),
                            onPressed: (){
-                            Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSelectPage()));
+                            Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
                             setState(() {
                               genre = "free";
                               artist = artistList[index];
@@ -72,10 +58,6 @@ class _artistselectState extends State<ArtistSelectPage> {
                    },
                  ),
              ),
-            //  TextButton(onPressed: (){
-            //    Navigator.pop(context);
-            //  }, child: Text("ジャンル選択画面にもどる")
-            //  ),
             ],
           ),
         ),

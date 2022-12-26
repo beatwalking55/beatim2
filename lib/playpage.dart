@@ -290,7 +290,7 @@ class _PlayPageState extends State<PlayPage> {
                               duls[1] = duls[0];
                               duls[0] = newtime - oldtime;
                               double ave_dul =
-                                  duls.length / [1/duls[0], 1/duls[1], 1/duls[2], 1/duls[3], 1/duls[4]].reduce((a, b) => a + b);
+                                  (duls.reduce((a, b) => a + b) - duls.reduce(max) - duls.reduce(min)) / (duls.length-2);
                               setState(() {
                                 sensingBPM = 60.0 / (ave_dul / 1000);
                               });
@@ -364,7 +364,7 @@ class _PlayPageState extends State<PlayPage> {
                       ),
                     ),
                     Container(
-                      //左右のバランスを取るための空箱。何か要素を入れることも可能。
+                      //左右のバランスを取るための空箱。
                       width: 60, //幅
                       height: 60, //高さ
                       child: Text(

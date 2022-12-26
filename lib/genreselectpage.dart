@@ -1,5 +1,5 @@
-import 'package:beatim/BPMselectpage.dart';
 import 'package:flutter/material.dart';
+import 'package:beatim/playpage.dart';
 import 'variables.dart';
 import 'musicdata.dart';
 import 'dart:math';
@@ -46,7 +46,7 @@ class _genreselectpageState extends State<genreselectpage> {
                             backgroundColor: Colors.black,//ボタンの背景色
                           ),
                           onPressed: (){
-                            Navigator.push(context,MaterialPageRoute(builder:(context) =>BPMSelectPage()));
+                            Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
                             setState(() {
                               genre = genreList[index];
                               artist = "free";
