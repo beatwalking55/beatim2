@@ -31,10 +31,10 @@ class _PlayPageState extends State<PlayPage> {
 
   //プレイリストを最初に生成。
   ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
-
-    children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
-
-
+    children: List.generate(
+        playlist.length,
+        (inde) =>
+            AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
   );
 
   var _playericon =
@@ -43,10 +43,11 @@ class _PlayPageState extends State<PlayPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-
-        backgroundColor: Colors.black,//上のバーの背景色
-        title: Text("曲を再生しよう",style: TextStyle(fontWeight: FontWeight.bold),),//上のバーのテキスト
-
+        backgroundColor: Colors.black, //上のバーの背景色
+        title: Text(
+          "曲を再生しよう",
+          style: TextStyle(fontWeight: FontWeight.bold),
+        ), //上のバーのテキスト
       ),
       body: Container(
         color: Colors.black, //画面の背景色
@@ -87,9 +88,10 @@ class _PlayPageState extends State<PlayPage> {
                           //タップされた時の処理
                           setState(() {
                             newplaylist = ConcatenatingAudioSource(
-
-                              children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
-
+                              children: List.generate(
+                                  playlist.length,
+                                  (inde) => AudioSource.uri(Uri.parse(
+                                      musics[playlist[inde]]['filename']))),
                             );
                             visible = true; //下の再生バーを表示する
                             music = musics[playlist[index]]
@@ -284,20 +286,22 @@ class _PlayPageState extends State<PlayPage> {
                               oldtime = newtime;
                               newtime = DateTime.now()
                                   .millisecondsSinceEpoch; //millisecond
-                              duls[4] = duls[3];
-                              duls[3] = duls[2];
-                              duls[2] = duls[1];
-                              duls[1] = duls[0];
+                              for (int i = duls.length - 1; i > 0; i--) {
+                                duls[i] = duls[i - 1];
+                              }
                               duls[0] = newtime - oldtime;
-                              double ave_dul =
-                                  (duls.reduce((a, b) => a + b) - duls.reduce(max) - duls.reduce(min)) / (duls.length-2);
+                              double ave_dul = (duls.reduce((a, b) => a + b) -
+                                      duls.reduce(max) -
+                                      duls.reduce(min)) /
+                                  (duls.length - 2);
                               setState(() {
                                 sensingBPM = 60.0 / (ave_dul / 1000);
                               });
                               bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
                               counter += 1;
-                              if (counter == 6) {
+                              if (counter == duls.length + 1) {
                                 setState(() {
+                                  _playericon = Icons.pause;
                                   playlist = musicselect(
                                       genre: genre,
                                       artist: artist,
@@ -305,9 +309,11 @@ class _PlayPageState extends State<PlayPage> {
                                   changingspeed = true;
                                   changingspeedbutton = "原曲";
                                   newplaylist = ConcatenatingAudioSource(
-
-                                    children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
-
+                                    children: List.generate(
+                                        playlist.length,
+                                        (inde) => AudioSource.uri(Uri.parse(
+                                            musics[playlist[inde]]
+                                                ['filename']))),
                                   );
                                   previous_sensingBPM = sensingBPM;
                                   setState(() {
@@ -368,11 +374,9 @@ class _PlayPageState extends State<PlayPage> {
                       width: 60, //幅
                       height: 60, //高さ
                       child: Text(
-                        "${counter.toStringAsFixed(0)}/6",
-                        style: TextStyle(
-                            fontSize: 25,
-                            color: Colors.white),
-                      ), 
+                        "${counter.toStringAsFixed(0)}/${(duls.length + 1).toStringAsFixed(0)}",
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
                     )
                   ],
                 ),
@@ -380,11 +384,11 @@ class _PlayPageState extends State<PlayPage> {
               Padding(
                 padding:
                     const EdgeInsets.fromLTRB(10, 0, 10, 100), //BPM計測ボタン周りの余白
-                child:Transform.rotate(
+                child: Transform.rotate(
                   angle: 0,
                   child: Slider(
                       inactiveColor: Colors.blue.shade50, //左側の色
-                      activeColor:  Colors.pinkAccent, //右側の色
+                      activeColor: Colors.pinkAccent, //右側の色
                       thumbColor: Colors.pinkAccent, //バーの丸いやつの色
                       value: sensingBPM, //バーの初期値を設定
                       min: min(80, sensingBPM), //最小値
@@ -394,7 +398,8 @@ class _PlayPageState extends State<PlayPage> {
                           previous_sensingBPM = sensingBPM;
                           sensingBPM = value;
                           bpm_ratio = sensingBPM / musics[playlist[0]]['BPM'];
-                          player.setSpeed(sensingBPM / musics[playlist[0]]['BPM']);
+                          player.setSpeed(
+                              sensingBPM / musics[playlist[0]]['BPM']);
                         });
                       }),
                 ),

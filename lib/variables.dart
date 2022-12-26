@@ -20,7 +20,7 @@ double bpm_ratio = 1.0; //BPM比であり曲の再生速度
 double ORIGINAL_musicBPM = 138; //goodnight:138, bgm1:152
 int oldtime = 0;
 int newtime = 0;
-List<int> duls = [1, 1, 1, 1, 1];
+List<int> duls = [1, 1, 1, 1, 1, 1, 1];
 
 ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
   children:List.generate(playlist.length, (inde) => AudioSource.uri(Uri.parse('asset:${musics[playlist[inde]]['filename']}'))),
