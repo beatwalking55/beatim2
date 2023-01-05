@@ -238,6 +238,10 @@ class _PlayPageState extends State<PlayPage> {
                       //左右のバランスを取るための空箱。何か要素を入れることも可能。
                       width: 60, //幅
                       height: 60, //高さ
+                      child: Text(
+                        "${counter.toStringAsFixed(0)}/${(duls.length + 1).toStringAsFixed(0)}",
+                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      ),
                       //原曲・走る速度切り替えボタン(現在非表示)
                       // child: TextButton(
                       //   onPressed:(){ setState(() {
@@ -372,10 +376,87 @@ class _PlayPageState extends State<PlayPage> {
                     Container(
                       //左右のバランスを取るための空箱。
                       width: 60, //幅
-                      height: 60, //高さ
-                      child: Text(
-                        "${counter.toStringAsFixed(0)}/${(duls.length + 1).toStringAsFixed(0)}",
-                        style: TextStyle(fontSize: 25, color: Colors.white),
+                      height: 120, //高さ
+                      child: Column(
+                        //内側の四角
+                        children: [
+                          Container(
+                          width: 30, //幅
+                          height: 30, //高さ
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              setState(() {
+                                previous_sensingBPM = sensingBPM;
+                                sensingBPM = (sensingBPM + 1).toInt().toDouble();
+                                bpm_ratio = sensingBPM / musics[playlist[0]]['BPM'];
+                                player.setSpeed(sensingBPM / musics[playlist[0]]['BPM']);
+                              });
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: <Widget>[
+                                Positioned(
+                                  top: 1.0,
+                                  child: Column(
+                                    //ボタンの中身
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(
+                                            1.0), //走る人マーク周りの余白
+                                        child: Icon(
+                                          Icons.add,
+                                          color: Colors.white,
+                                          size: 30,
+                                        ), //プラスのマーク
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        Padding(padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),),
+                        Container(
+                          width: 30, //幅
+                          height: 30, //高さ
+                          child: GestureDetector(
+                            behavior: HitTestBehavior.opaque,
+                            onTap: () {
+                              setState(() {
+                                previous_sensingBPM = sensingBPM;
+                                sensingBPM = (sensingBPM - 1).toInt().toDouble();
+                                bpm_ratio = sensingBPM / musics[playlist[0]]['BPM'];
+                                player.setSpeed(sensingBPM / musics[playlist[0]]['BPM']);
+                              });
+                            },
+                            child: Stack(
+                              alignment: Alignment.center,
+                              children: <Widget>[
+                                Positioned(
+                                  top: 1.0,
+                                  child: Column(
+                                    //ボタンの中身
+                                    children: [
+                                      Padding(
+                                        padding: const EdgeInsets.all(
+                                            1.0), //走る人マーク周りの余白
+                                        child: Icon(
+                                          Icons.remove,
+                                          color: Colors.white,
+                                          size: 30,
+                                        ), //マイナスのマーク
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ),
+                        ]
+                          
                       ),
                     )
                   ],
@@ -383,7 +464,7 @@ class _PlayPageState extends State<PlayPage> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.fromLTRB(10, 0, 10, 10), //BPM計測ボタン周りの余白
+                    const EdgeInsets.fromLTRB(10, 0, 10, 30), //BPM計測ボタン周りの余白
                 child: Transform.rotate(
                   angle: 0,
                   child: Slider(
