@@ -206,13 +206,13 @@ class _PlayPageState extends State<PlayPage> {
                                 ),
                                 //先送りボタン
                                 IconButton(
-                                    onPressed: () {
-                                      player.seekToNext();
-                                      setState(() {});
-                                      bpm_ratio = sensingBPM /
-                                          musics[playlist[
-                                              player.currentIndex ?? 0]]['BPM'];
-                                      player.setSpeed(bpm_ratio);
+                                    onPressed: () async {
+                                      await player.seekToNext();
+                                      setState(() {
+                                        bpm_ratio = sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM'];
+                                        print(player.currentIndex);
+                                        player.setSpeed(bpm_ratio);
+                                      });
                                     },
                                     icon: Icon(
                                       Icons.fast_forward,
