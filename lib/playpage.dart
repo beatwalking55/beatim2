@@ -6,6 +6,7 @@ import 'package:just_audio/just_audio.dart';
 import 'package:audio_session/audio_session.dart';
 import 'package:beatim/musicselectfunction.dart';
 import 'dart:math';
+import 'package:flutter/services.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({Key? key}) : super(key: key);
@@ -160,12 +161,17 @@ class _PlayPageState extends State<PlayPage> {
                               children: [
                                 //頭出しボタン
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0), //頭出しボタン周りの余白
+                                  padding: const EdgeInsets.fromLTRB(
+                                      0, 0, 0, 0), //頭出しボタン周りの余白
                                   child: IconButton(
                                       onPressed: () async {
+                                        HapticFeedback.mediumImpact();
                                         await player.seekToPrevious();
                                         setState(() {});
-                                        bpm_ratio = sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM'];
+                                        bpm_ratio = sensingBPM /
+                                            musics[playlist[
+                                                    player.currentIndex ?? 0]]
+                                                ['BPM'];
                                         player.setSpeed(bpm_ratio);
                                       },
                                       icon: Icon(
@@ -181,6 +187,7 @@ class _PlayPageState extends State<PlayPage> {
                                       50, 0, 50, 0), //再生・停止ボタン周りの余白
                                   child: IconButton(
                                       onPressed: () {
+                                        HapticFeedback.mediumImpact();
                                         if (player.playing) {
                                           setState(() {
                                             _playericon = Icons.play_arrow;
@@ -203,9 +210,12 @@ class _PlayPageState extends State<PlayPage> {
                                 //先送りボタン
                                 IconButton(
                                     onPressed: () async {
+                                      HapticFeedback.mediumImpact();
                                       await player.seekToNext();
                                       setState(() {});
-                                      bpm_ratio = sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM'];
+                                      bpm_ratio = sensingBPM /
+                                          musics[playlist[
+                                              player.currentIndex ?? 0]]['BPM'];
                                       print(player.currentIndex);
                                       player.setSpeed(bpm_ratio);
                                     },
@@ -282,6 +292,7 @@ class _PlayPageState extends State<PlayPage> {
                             //BPMsensingpageのものとほぼ同じ
                             behavior: HitTestBehavior.opaque,
                             onTap: () {
+                              HapticFeedback.lightImpact();
                               oldtime = newtime;
                               newtime = DateTime.now()
                                   .millisecondsSinceEpoch; //millisecond
@@ -299,6 +310,7 @@ class _PlayPageState extends State<PlayPage> {
                               bpm_ratio = sensingBPM / ORIGINAL_musicBPM;
                               counter += 1;
                               if (counter == duls.length + 1) {
+                                HapticFeedback.vibrate();
                                 setState(() {
                                   _playericon = Icons.pause;
                                   playlist = musicselect(
@@ -373,86 +385,94 @@ class _PlayPageState extends State<PlayPage> {
                       width: 60, //幅
                       height: 120, //高さ
                       child: Column(
-                        //内側の四角
-                        children: [
-                          Container(
-                          width: 30, //幅
-                          height: 30, //高さ
-                          child: GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onTap: () {
-                              setState(() {
-                                previous_sensingBPM = sensingBPM;
-                                sensingBPM = (sensingBPM + 1).toInt().toDouble();
-                                bpm_ratio = sensingBPM / musics[playlist[0]]['BPM'];
-                                player.setSpeed(sensingBPM / musics[playlist[0]]['BPM']);
-                              });
-                            },
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                                Positioned(
-                                  top: 1.0,
-                                  child: Column(
-                                    //ボタンの中身
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(
-                                            1.0), //走る人マーク周りの余白
-                                        child: Icon(
-                                          Icons.add,
-                                          color: Colors.white,
-                                          size: 30,
-                                        ), //プラスのマーク
+                          //内側の四角
+                          children: [
+                            Container(
+                              width: 30, //幅
+                              height: 30, //高さ
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () {
+                                  HapticFeedback.lightImpact();
+                                  setState(() {
+                                    previous_sensingBPM = sensingBPM;
+                                    sensingBPM =
+                                        (sensingBPM + 1).toInt().toDouble();
+                                    bpm_ratio =
+                                        sensingBPM / musics[playlist[0]]['BPM'];
+                                    player.setSpeed(sensingBPM /
+                                        musics[playlist[0]]['BPM']);
+                                  });
+                                },
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: <Widget>[
+                                    Positioned(
+                                      top: 1.0,
+                                      child: Column(
+                                        //ボタンの中身
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(
+                                                1.0), //走る人マーク周りの余白
+                                            child: Icon(
+                                              Icons.add,
+                                              color: Colors.white,
+                                              size: 30,
+                                            ), //プラスのマーク
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                        Padding(padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),),
-                        Container(
-                          width: 30, //幅
-                          height: 30, //高さ
-                          child: GestureDetector(
-                            behavior: HitTestBehavior.opaque,
-                            onTap: () {
-                              setState(() {
-                                previous_sensingBPM = sensingBPM;
-                                sensingBPM = (sensingBPM - 1).toInt().toDouble();
-                                bpm_ratio = sensingBPM / musics[playlist[0]]['BPM'];
-                                player.setSpeed(sensingBPM / musics[playlist[0]]['BPM']);
-                              });
-                            },
-                            child: Stack(
-                              alignment: Alignment.center,
-                              children: <Widget>[
-                                Positioned(
-                                  top: 1.0,
-                                  child: Column(
-                                    //ボタンの中身
-                                    children: [
-                                      Padding(
-                                        padding: const EdgeInsets.all(
-                                            1.0), //走る人マーク周りの余白
-                                        child: Icon(
-                                          Icons.remove,
-                                          color: Colors.white,
-                                          size: 30,
-                                        ), //マイナスのマーク
+                            Padding(
+                              padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                            ),
+                            Container(
+                              width: 30, //幅
+                              height: 30, //高さ
+                              child: GestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                onTap: () {
+                                  HapticFeedback.lightImpact();
+                                  setState(() {
+                                    previous_sensingBPM = sensingBPM;
+                                    sensingBPM =
+                                        (sensingBPM - 1).toInt().toDouble();
+                                    bpm_ratio =
+                                        sensingBPM / musics[playlist[0]]['BPM'];
+                                    player.setSpeed(sensingBPM /
+                                        musics[playlist[0]]['BPM']);
+                                  });
+                                },
+                                child: Stack(
+                                  alignment: Alignment.center,
+                                  children: <Widget>[
+                                    Positioned(
+                                      top: 1.0,
+                                      child: Column(
+                                        //ボタンの中身
+                                        children: [
+                                          Padding(
+                                            padding: const EdgeInsets.all(
+                                                1.0), //走る人マーク周りの余白
+                                            child: Icon(
+                                              Icons.remove,
+                                              color: Colors.white,
+                                              size: 30,
+                                            ), //マイナスのマーク
+                                          ),
+                                        ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
-                              ],
+                              ),
                             ),
-                          ),
-                        ),
-                        ]
-                          
-                      ),
+                          ]),
                     )
                   ],
                 ),
@@ -470,6 +490,7 @@ class _PlayPageState extends State<PlayPage> {
                       min: min(80, sensingBPM), //最小値
                       max: max(200, sensingBPM), //最大値
                       onChanged: (value) {
+                        HapticFeedback.selectionClick();
                         setState(() {
                           previous_sensingBPM = sensingBPM;
                           sensingBPM = value;
