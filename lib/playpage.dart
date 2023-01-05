@@ -160,16 +160,12 @@ class _PlayPageState extends State<PlayPage> {
                               children: [
                                 //頭出しボタン
                                 Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      0, 0, 0, 0), //頭出しボタン周りの余白
+                                  padding: const EdgeInsets.fromLTRB(0, 0, 0, 0), //頭出しボタン周りの余白
                                   child: IconButton(
-                                      onPressed: () {
-                                        player.seekToPrevious();
+                                      onPressed: () async {
+                                        await player.seekToPrevious();
                                         setState(() {});
-                                        bpm_ratio = sensingBPM /
-                                            musics[playlist[
-                                                    player.currentIndex ?? 0]]
-                                                ['BPM'];
+                                        bpm_ratio = sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM'];
                                         player.setSpeed(bpm_ratio);
                                       },
                                       icon: Icon(
@@ -206,12 +202,11 @@ class _PlayPageState extends State<PlayPage> {
                                 ),
                                 //先送りボタン
                                 IconButton(
-                                    onPressed: () {
-                                      player.seekToNext();
+                                    onPressed: () async {
+                                      await player.seekToNext();
                                       setState(() {});
-                                      bpm_ratio = sensingBPM /
-                                          musics[playlist[
-                                              player.currentIndex ?? 0]]['BPM'];
+                                      bpm_ratio = sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM'];
+                                      print(player.currentIndex);
                                       player.setSpeed(bpm_ratio);
                                     },
                                     icon: Icon(
