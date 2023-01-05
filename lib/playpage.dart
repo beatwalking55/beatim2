@@ -383,7 +383,7 @@ class _PlayPageState extends State<PlayPage> {
               ),
               Padding(
                 padding:
-                    const EdgeInsets.fromLTRB(10, 0, 10, 100), //BPM計測ボタン周りの余白
+                    const EdgeInsets.fromLTRB(10, 0, 10, 10), //BPM計測ボタン周りの余白
                 child: Transform.rotate(
                   angle: 0,
                   child: Slider(
