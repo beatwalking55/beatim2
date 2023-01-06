@@ -7,6 +7,8 @@ import 'package:audio_session/audio_session.dart';
 import 'package:beatim/musicselectfunction.dart';
 import 'dart:math';
 import 'package:flutter/services.dart';
+import 'package:rxdart/rxdart.dart';
+import 'package:beatim/common.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({Key? key}) : super(key: key);
@@ -34,19 +36,27 @@ class _PlayPageState extends State<PlayPage> {
   ConcatenatingAudioSource newplaylist = ConcatenatingAudioSource(
     children: List.generate(
         playlist.length,
-        (inde) =>
-            AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
+        (inde) => AudioSource.uri(Uri.parse(musics[playlist[inde]]['filename']))),
   );
 
-  var _playericon =
-      Icons.play_arrow; //playpageの下の方に表示されるマーク play_arrow:再生マーク　pause:停止マーク
+  Stream<PositionData> get _positionDataStream =>
+      Rx.combineLatest3<Duration, Duration, Duration?, PositionData>(
+          player.positionStream,
+          player.bufferedPositionStream,
+          player.durationStream,
+          (position, bufferedPosition, duration) => PositionData(
+              position, bufferedPosition, duration ?? Duration.zero));
+
+  var _playericon = Icons.play_arrow; //playpageの下の方に表示されるマーク play_arrow:再生マーク　pause:停止マーク
+
   int counter = 0;
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black, //上のバーの背景色
         title: Text(
-          "曲を再生しよう",
+          "Playlist",
           style: TextStyle(fontWeight: FontWeight.bold),
         ), //上のバーのテキスト
       ),
@@ -56,9 +66,6 @@ class _PlayPageState extends State<PlayPage> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Text("ジャンル：${genre}",),
-              // Text("アーティスト：${artist}"),
-              // Text("BPM：${sensingBPM}"),
               //曲を選んで再生する部分。
               Flexible(
                 child: ListView.builder(
@@ -227,6 +234,21 @@ class _PlayPageState extends State<PlayPage> {
                                     )
                               ],
                             ),
+                          ),
+                          StreamBuilder<PositionData>(
+                            stream: _positionDataStream,
+                            builder: (context, snapshot) {
+                              final positionData = snapshot.data;
+                              return SeekBar(
+                                duration: positionData?.duration ?? Duration.zero,
+                                position: positionData?.position ?? Duration.zero,
+                                bufferedPosition:
+                                    positionData?.bufferedPosition ?? Duration.zero,
+                                onChangeEnd: (newPosition) {
+                                  player.seek(newPosition);
+                                },
+                              );
+                            },
                           ),
                         ],
                       );
@@ -478,8 +500,7 @@ class _PlayPageState extends State<PlayPage> {
                 ),
               ),
               Padding(
-                padding:
-                    const EdgeInsets.fromLTRB(10, 0, 10, 30), //BPM計測ボタン周りの余白
+                padding: const EdgeInsets.fromLTRB(10, 0, 10, 30), //スライドバー周りの余白
                 child: Transform.rotate(
                   angle: 0,
                   child: Slider(
