@@ -22,6 +22,29 @@ class _PlayPageState extends State<PlayPage> {
   void initState() {
     super.initState;
     _setupSession();
+    // AudioPlayerの状態を取得
+    player.playbackEventStream.listen((event) {
+      switch(event.processingState) {
+        case ProcessingState.idle:
+          print('オーディオファイルをロードしていないよ');
+          break;
+        case ProcessingState.loading:
+          print('オーディオファイルをロード中だよ');
+          break;
+        case ProcessingState.buffering:
+          print('バッファリング(読み込み)中だよ');
+          break;
+        case ProcessingState.ready:
+          print('再生できるよ');
+          break;
+        case ProcessingState.completed:
+          print('再生終了したよ');
+          break;
+        default:
+          print(event.processingState);
+          break;
+      }
+    });
   }
 
   //このコードがあると画面遷移時に音楽が止まる。
@@ -171,8 +194,10 @@ class _PlayPageState extends State<PlayPage> {
                                   padding: const EdgeInsets.fromLTRB(
                                       0, 0, 0, 0), //頭出しボタン周りの余白
                                   child: IconButton(
+
                                       onPressed: () async {
                                         HapticFeedback.mediumImpact();
+
                                         await player.seekToPrevious();
                                         setState(() {});
                                         bpm_ratio = sensingBPM /
@@ -216,8 +241,10 @@ class _PlayPageState extends State<PlayPage> {
                                 ),
                                 //先送りボタン
                                 IconButton(
+
                                     onPressed: () async {
                                       HapticFeedback.mediumImpact();
+
                                       await player.seekToNext();
                                       setState(() {});
                                       bpm_ratio = sensingBPM /
