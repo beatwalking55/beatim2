@@ -1,5 +1,4 @@
 import 'package:beatim/variables.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:beatim/musicdata.dart';
 import 'package:just_audio/just_audio.dart';
@@ -24,24 +23,24 @@ class _PlayPageState extends State<PlayPage> {
     _setupSession();
     // AudioPlayerの状態を取得
     player.playbackEventStream.listen((event) {
-      switch(event.processingState) {
+      switch (event.processingState) {
         case ProcessingState.idle:
-          print('オーディオファイルをロードしていないよ');
+          debugPrint('オーディオファイルをロードしていないよ');
           break;
         case ProcessingState.loading:
-          print('オーディオファイルをロード中だよ');
+          debugPrint('オーディオファイルをロード中だよ');
           break;
         case ProcessingState.buffering:
-          print('バッファリング(読み込み)中だよ');
+          debugPrint('バッファリング(読み込み)中だよ');
           break;
         case ProcessingState.ready:
-          print('再生できるよ');
+          debugPrint('再生できるよ');
           break;
         case ProcessingState.completed:
-          print('再生終了したよ');
+          debugPrint('再生終了したよ');
           break;
         default:
-          print(event.processingState);
+          debugPrint(event.processingState.toString());
           break;
       }
     });
@@ -133,9 +132,6 @@ class _PlayPageState extends State<PlayPage> {
                                 sensingBPM / ORIGINAL_musicBPM; //再生スピードを指定
                             player.setSpeed(
                                 sensingBPM / ORIGINAL_musicBPM); //再生スピードを設定・
-                            changingspeed = true; //変速していることを示す
-                            changingspeedbutton =
-                                "原曲"; //再生バーの表示を変更（最初は走る速度で再生するから、「原曲」ボタンになる）
                             _playericon =
                                 Icons.pause; //再生バーのアイコン(再生時には「停止」マークになる)
                           });
@@ -169,99 +165,11 @@ class _PlayPageState extends State<PlayPage> {
                                   ['name'],
                               overflow: TextOverflow.ellipsis,
                               style:
-                                  TextStyle(fontSize: 40, color: Colors.white),
+                                  TextStyle(fontSize: 30, color: Colors.white),
                             ) //現在再生している曲
                                 ),
                           ),
-                          Padding(
-                            padding: const EdgeInsets.all(4.0), //再生速度周りの余白
-                            child: Container(
-                              child: Text(
-                                "再生速度:×${bpm_ratio.toStringAsFixed(2)}",
-                                style: TextStyle(
-                                    color: Colors.white, fontSize: 20),
-                              ), //現在の再生速度
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(0, 0, 15,
-                                0), //再生ボタン周りの余白。少し右に余白をとり全体を左に寄せるとバランスよく見える。
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                //頭出しボタン
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      0, 0, 0, 0), //頭出しボタン周りの余白
-                                  child: IconButton(
-
-                                      onPressed: () async {
-                                        HapticFeedback.mediumImpact();
-
-                                        await player.seekToPrevious();
-                                        setState(() {});
-                                        bpm_ratio = sensingBPM /
-                                            musics[playlist[
-                                                    player.currentIndex ?? 0]]
-                                                ['BPM'];
-                                        player.setSpeed(bpm_ratio);
-                                      },
-                                      icon: Icon(
-                                        Icons.fast_rewind,
-                                        color: Colors.white,
-                                        size: 50,
-                                      ) //頭出しボタンのアイコン
-                                      ),
-                                ),
-                                //再生・停止ボタン・
-                                Padding(
-                                  padding: const EdgeInsets.fromLTRB(
-                                      50, 0, 50, 0), //再生・停止ボタン周りの余白
-                                  child: IconButton(
-                                      onPressed: () {
-                                        HapticFeedback.mediumImpact();
-                                        if (player.playing) {
-                                          setState(() {
-                                            _playericon = Icons.play_arrow;
-                                          });
-                                          player.pause();
-                                        } else {
-                                          setState(() {
-                                            _playericon = Icons.pause;
-                                          });
-                                          player.play();
-                                        }
-                                      },
-                                      icon: Icon(
-                                        _playericon,
-                                        color: Colors.white,
-                                        size: 50,
-                                      ) //再生・停止ボタンのアイコン
-                                      ),
-                                ),
-                                //先送りボタン
-                                IconButton(
-
-                                    onPressed: () async {
-                                      HapticFeedback.mediumImpact();
-
-                                      await player.seekToNext();
-                                      setState(() {});
-                                      bpm_ratio = sensingBPM /
-                                          musics[playlist[
-                                              player.currentIndex ?? 0]]['BPM'];
-                                      print(player.currentIndex);
-                                      player.setSpeed(bpm_ratio);
-                                    },
-                                    icon: Icon(
-                                      Icons.fast_forward,
-                                      color: Colors.white,
-                                      size: 50,
-                                    ) //先送りボタンのアイコン
-                                    )
-                              ],
-                            ),
-                          ),
+                          ControlButtons(player),
                           StreamBuilder<PositionData>(
                             stream: _positionDataStream,
                             builder: (context, snapshot) {
@@ -296,21 +204,6 @@ class _PlayPageState extends State<PlayPage> {
                         "${counter.toStringAsFixed(0)}/${(duls.length + 1).toStringAsFixed(0)}",
                         style: TextStyle(fontSize: 25, color: Colors.white),
                       ),
-                      //原曲・走る速度切り替えボタン(現在非表示)
-                      // child: TextButton(
-                      //   onPressed:(){ setState(() {
-                      //     if(changingspeed == true){
-                      //       changingspeed = false;
-                      //       player.setSpeed(1.0);
-                      //       changingspeedbutton = "走速";
-                      //     }else{
-                      //       changingspeed = true;
-                      //       player.setSpeed(sensingBPM/musics[playlist[player.currentIndex ?? 0]]['BPM']);
-                      //       changingspeedbutton = "原曲";
-                      //     }
-                      //   });},
-                      //   child: Text(changingspeedbutton),
-                      //),
                     ),
                     //BPM計測ボタン
                     Container(
@@ -366,8 +259,6 @@ class _PlayPageState extends State<PlayPage> {
                                       genre: genre,
                                       artist: artist,
                                       BPM: sensingBPM);
-                                  changingspeed = true;
-                                  changingspeedbutton = "原曲";
                                   newplaylist = ConcatenatingAudioSource(
                                     children: List.generate(
                                         playlist.length,
@@ -447,10 +338,8 @@ class _PlayPageState extends State<PlayPage> {
                                     previous_sensingBPM = sensingBPM;
                                     sensingBPM =
                                         (sensingBPM + 1).toInt().toDouble();
-                                    bpm_ratio =
-                                        sensingBPM / musics[playlist[0]]['BPM'];
-                                    player.setSpeed(sensingBPM /
-                                        musics[playlist[0]]['BPM']);
+                                    bpm_ratio = sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM'];
+                                    player.setSpeed(sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM']);
                                   });
                                 },
                                 child: Stack(
@@ -464,11 +353,9 @@ class _PlayPageState extends State<PlayPage> {
                                           Padding(
                                             padding: const EdgeInsets.all(
                                                 1.0), //走る人マーク周りの余白
-                                            child: Icon(
-                                              Icons.add,
-                                              color: Colors.white,
-                                              size: 30,
-                                            ), //プラスのマーク
+                                            child: Icon(Icons.add,
+                                                color: Colors.white,
+                                                size: 30), //プラスのマーク
                                           ),
                                         ],
                                       ),
@@ -478,7 +365,7 @@ class _PlayPageState extends State<PlayPage> {
                               ),
                             ),
                             Padding(
-                              padding: const EdgeInsets.fromLTRB(0, 20, 0, 20),
+                              padding: const EdgeInsets.fromLTRB(0, 25, 0, 25),
                             ),
                             Container(
                               width: 30, //幅
@@ -492,9 +379,9 @@ class _PlayPageState extends State<PlayPage> {
                                     sensingBPM =
                                         (sensingBPM - 1).toInt().toDouble();
                                     bpm_ratio =
-                                        sensingBPM / musics[playlist[0]]['BPM'];
+                                        sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM'];
                                     player.setSpeed(sensingBPM /
-                                        musics[playlist[0]]['BPM']);
+                                        musics[playlist[player.currentIndex ?? 0]]['BPM']);
                                   });
                                 },
                                 child: Stack(
@@ -537,34 +424,22 @@ class _PlayPageState extends State<PlayPage> {
                       value: sensingBPM, //バーの初期値を設定
                       min: min(80, sensingBPM), //最小値
                       max: max(200, sensingBPM), //最大値
+                      divisions: 120,
                       onChanged: (value) {
                         HapticFeedback.selectionClick();
                         setState(() {
                           previous_sensingBPM = sensingBPM;
                           sensingBPM = value;
-                          bpm_ratio = sensingBPM / musics[playlist[0]]['BPM'];
-                          player.setSpeed(
-                              sensingBPM / musics[playlist[0]]['BPM']);
+                          bpm_ratio = sensingBPM /
+                              musics[playlist[player.currentIndex ?? 0]]['BPM'];
+                          player.setSpeed(sensingBPM /
+                              musics[playlist[player.currentIndex ?? 0]]
+                                  ['BPM']);
                         });
                       }),
                 ),
               )
-              //曲IDとBPMを表示する。
-              // Flexible(
-              //   child: StreamBuilder<int?>(
-              //     stream: player.currentIndexStream,
-              //     initialData: 0,
-              //     builder: (BuildContext context,snapshot){
-              //       return Row(
-              //         mainAxisAlignment: MainAxisAlignment.center,
-              //         children: [
-              //           Text("曲ID ${playlist[snapshot.data ??0]}   ",style: TextStyle(fontSize: 30),),
-              //           Text("BPM  ${sensingBPM.toInt()}",style: TextStyle(fontSize: 30),),
-              //         ],
-              //       );
-              //     }
-              //   ),
-              // ),
+
               //評価フォームへのリンクを画面に表示。
               // TextButton(
               //     onPressed:()async{
@@ -611,4 +486,131 @@ Future<void> _setupSession() async {
   final session = await AudioSession.instance;
   await session.configure(AudioSessionConfiguration.speech());
   ;
+}
+
+class ControlButtons extends StatelessWidget {
+  final AudioPlayer player;
+
+  const ControlButtons(this.player, {Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        IconButton(
+          icon: const Icon(Icons.volume_up, color: Colors.white),
+          onPressed: () {
+            showSliderDialog(
+              context: context,
+              title: "Adjust volume",
+              divisions: 10,
+              min: 0.0,
+              max: 1.0,
+              value: player.volume,
+              stream: player.volumeStream,
+              onChanged: player.setVolume,
+            );
+          },
+        ),
+        StreamBuilder<SequenceState?>(
+          stream: player.sequenceStateStream,
+          builder: (context, snapshot) => IconButton(
+              icon: const Icon(Icons.skip_previous, color: Colors.white),
+              onPressed: () async {
+                await player.seekToPrevious();
+                bpm_ratio = sensingBPM /
+                    musics[playlist[player.currentIndex ?? 0]]['BPM'];
+                player.setSpeed(bpm_ratio);
+              }),
+        ),
+        StreamBuilder<PlayerState>(
+          stream: player.playerStateStream,
+          builder: (context, snapshot) {
+            final playerState = snapshot.data;
+            final processingState = playerState?.processingState;
+            final playing = playerState?.playing;
+            if (processingState == ProcessingState.loading ||
+                processingState == ProcessingState.buffering) {
+              return Container(
+                margin: const EdgeInsets.all(8.0),
+                width: 64.0,
+                height: 64.0,
+                child: const CircularProgressIndicator(color: Colors.white),
+              );
+            } else if (playing != true) {
+              return IconButton(
+                icon: const Icon(Icons.play_arrow, color: Colors.white),
+                iconSize: 64.0,
+                onPressed: player.play,
+              );
+            } else if (processingState != ProcessingState.completed) {
+              return IconButton(
+                icon: const Icon(Icons.pause, color: Colors.white),
+                iconSize: 64.0,
+                onPressed: player.pause,
+              );
+            } else {
+              return IconButton(
+                icon: const Icon(Icons.replay, color: Colors.white),
+                iconSize: 64.0,
+                onPressed: () => player.seek(Duration.zero,
+                    index: player.effectiveIndices!.first),
+              );
+            }
+          },
+        ),
+        StreamBuilder<SequenceState?>(
+          stream: player.sequenceStateStream,
+          builder: (context, snapshot) => IconButton(
+              icon: const Icon(Icons.skip_next, color: Colors.white),
+              onPressed: () async {
+                await player.seekToNext();
+                bpm_ratio = sensingBPM /
+                    musics[playlist[player.currentIndex ?? 0]]['BPM'];
+                debugPrint(
+                    musics[playlist[player.currentIndex ?? 0]].toString());
+                debugPrint(bpm_ratio.toString());
+                player.setSpeed(bpm_ratio);
+              }),
+        ),
+        StreamBuilder<double>(
+          stream: player.speedStream,
+          builder: (context, snapshot) => IconButton(
+            icon: Text(
+              "${snapshot.data?.toStringAsFixed(2)}x",
+              style: const TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.white),
+            ),
+            onPressed: () {
+              showSliderDialog(
+                context: context,
+                title: "Adjust speed",
+                divisions: 10,
+                min: 0.5,
+                max: 1.5,
+                value: player.speed,
+                stream: player.speedStream,
+                onChanged: player.setSpeed,
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class AudioMetadata {
+  final String album;
+  final String title;
+  final String artwork;
+  final double bpm;
+
+  AudioMetadata({
+    required this.album,
+    required this.title,
+    required this.artwork,
+    required this.bpm,
+  });
 }
