@@ -115,29 +115,10 @@ class _PlayPageState extends State<PlayPage> {
                           style: const TextStyle(fontSize: 17),
                           overflow: TextOverflow.ellipsis,
                         ), //曲名
-                        onPressed: () {
+                        onPressed: () async {
                           //タップされた時の処理
-                          setState(() {
-                            newplaylist = ConcatenatingAudioSource(
-                              children: List.generate(
-                                  playlist.length,
-                                  (inde) => AudioSource.uri(Uri.parse(
-                                      musics[playlist[inde]]['filename']))),
-                            );
-                            visible = true; //下の再生バーを表示する
-                            music = musics[playlist[index]]
-                                ['filename']; //曲のファイル名を指定
-                            originalMusicBPM =
-                                musics[playlist[index]]['BPM']; //曲のBPMを指定
-                            adjustSpeed();
-                          });
-                          player.setLoopMode(LoopMode.all); //ループ再生on
-                          player.setAudioSource(newplaylist,
-                              initialIndex: index,
-                              initialPosition:
-                                  Duration.zero); //index番目の曲をplayerにセット
-                          player.play(); //playerを再生
-                          setState(() {}); //再描画
+                          await player.setLoopMode(LoopMode.all); //ループ再生on
+                          await player.seek(Duration.zero,index: index);//index番目の曲にスキップ
                         },
                       ),
                     );
@@ -241,7 +222,6 @@ class _PlayPageState extends State<PlayPage> {
                               setState(() {
                                 sensingBPM = 60.0 / (aveDul / 1000);
                               });
-                              bpmRatio = sensingBPM / originalMusicBPM;
                               counter += 1;
                               if (counter == duls.length + 1) {
                                 HapticFeedback.vibrate();
@@ -485,7 +465,6 @@ class ControlButtons extends StatelessWidget {
               icon: const Icon(Icons.skip_previous, color: Colors.white),
               onPressed: () async {
                 await player.seekToPrevious();
-                adjustSpeed();
               }),
         ),
         StreamBuilder<PlayerState>(
@@ -535,7 +514,6 @@ class ControlButtons extends StatelessWidget {
               icon: const Icon(Icons.skip_next, color: Colors.white),
               onPressed: () async {
                 await player.seekToNext();
-                adjustSpeed();
               }),
         ),
         StreamBuilder<double>(
@@ -580,6 +558,5 @@ class AudioMetadata {
 }
 
 adjustSpeed() {
-  bpmRatio = sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM'];
-  player.setSpeed(bpmRatio);
+  player.setSpeed(sensingBPM / musics[playlist[player.currentIndex ?? 0]]['BPM']);
 }
