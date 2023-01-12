@@ -37,7 +37,7 @@ musicselect({genre, artist, BPM}) {
     double _random_weight = 1-_beatability_weight - _bpmratio_weight;
 
     return _beatability_weight*_normalized_beatability + _bpmratio_weight*_normalized_bpmratio + _normalized_random*_random_weight;//型に注意
-  };
+  }
 
 
   //おまかせ（ジャンルフリー、アーティストフリー）の場合
@@ -110,7 +110,7 @@ musicselect({genre, artist, BPM}) {
     playList.addAll(playListb);
 
     //BPM的に合う曲がなかった時の救済
-    if (playList.length == 0) {
+    if (playList.isEmpty) {
       return List.generate(numberofmusics, (index) => index);
     }
 
@@ -160,10 +160,10 @@ musicselect({genre, artist, BPM}) {
     playList.addAll(playListb);
 
     //BPM的に合う曲がなかった時の救済
-    if (playList.length == 0) {
+    if (playList.isEmpty) {
       return List.generate(numberofmusics, (index) => index);
     }
 
     return playList;
-  };
+  }
 }

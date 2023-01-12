@@ -31,7 +31,7 @@ class _LinkPastePageState extends State<LinkPastePage> {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Text("1:聞きたい音楽のmp3ファイルをgoogle driveにアップロード\n2:共有設定からリンクを知っている全員に編集者権限を付与\n3:共有リンクをコピーして貼り付けてください。",
+              const Text("1:聞きたい音楽のmp3ファイルをgoogle driveにアップロード\n2:共有設定からリンクを知っている全員に編集者権限を付与\n3:共有リンクをコピーして貼り付けてください。",
                 style: TextStyle(
                     color: Colors.black
                 ),
@@ -40,7 +40,7 @@ class _LinkPastePageState extends State<LinkPastePage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "リンク"
                   ),
                   onChanged: (text){
@@ -54,7 +54,7 @@ class _LinkPastePageState extends State<LinkPastePage> {
 
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
-                    side: BorderSide(
+                    side: const BorderSide(
                       color: Colors.black,
                     ),
                   ),
@@ -63,10 +63,10 @@ class _LinkPastePageState extends State<LinkPastePage> {
                       inputlink(link);
                     });
                     if(numberofmusics > 0){
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => inputnamepage()));
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => const InputNamePage()));
                     }
                 },
-                    child: Text("次へ",style: TextStyle(fontSize: 30,color: Colors.black),)
+                    child: const Text("次へ",style: TextStyle(fontSize: 30,color: Colors.black),)
                 ),
               )
             ],
@@ -84,6 +84,6 @@ inputlink(link){
   numberofmusics = links.length;
   for(i=0; i<numberofmusics;i++){
       musics[i]['filename']="https://drive.google.com/uc?export=download&id=${links[i].substring(links[i].indexOf("d/")+2,links[i].indexOf("/view"))}";
-      print(musics[i]['filename']);
+      debugPrint(musics[i]['filename']);
   }
 }

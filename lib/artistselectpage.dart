@@ -1,4 +1,3 @@
-import 'package:beatim/musicselectfunction.dart';
 import 'package:beatim/playpage.dart';
 import 'package:flutter/material.dart';
 import 'variables.dart';
@@ -8,17 +7,17 @@ class ArtistSelectPage extends StatefulWidget {
   const ArtistSelectPage({Key? key}) : super(key: key);
 
   @override
-  State<ArtistSelectPage> createState() => _artistselectState();
+  State<ArtistSelectPage> createState() => _ArtistselectState();
 }
 
-class _artistselectState extends State<ArtistSelectPage> {
+class _ArtistselectState extends State<ArtistSelectPage> {
   final List artistList = List.generate(musics.length, (index) => musics[index]['artist']).toSet().toList();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("アーティストを選択",style: TextStyle(fontWeight: FontWeight.bold),),
+        title: const Text("アーティストを選択",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Container(
         color: Colors.black,
@@ -32,10 +31,10 @@ class _artistselectState extends State<ArtistSelectPage> {
                    itemCount: artistList.length,
                    itemBuilder: (BuildContext context,int index){
                      return Container(
-                       decoration: BoxDecoration(
+                       decoration: const BoxDecoration(
                          color: Colors.black,
                          border:Border(
-                           bottom: const BorderSide(color: Colors.white30),//ボタンの下のみにボーダーラインを設定
+                           bottom: BorderSide(color: Colors.white30),//ボタンの下のみにボーダーラインを設定
                          ),
                        ),
                        child: Padding(
@@ -46,12 +45,12 @@ class _artistselectState extends State<ArtistSelectPage> {
                              backgroundColor: Colors.black,//ボタンの背景色
                            ),
                            onPressed: (){
-                            Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
+                            Navigator.push(context,MaterialPageRoute(builder:(context) =>const PlayPage()));
                             setState(() {
                               genre = "free";
                               artist = artistList[index];
                             });
-                         }, child: Text(artistList[index],style: TextStyle(fontSize: 30,color: Colors.white),),
+                         }, child: Text(artistList[index],style: const TextStyle(fontSize: 30,color: Colors.white),),
                          ),
                        ),
                      );
