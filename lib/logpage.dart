@@ -5,23 +5,23 @@ import 'musicdata.dart';
 import 'playpage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-class logpage extends StatefulWidget {
-  const logpage({Key? key}) : super(key: key);
+class LogPage extends StatefulWidget {
+  const LogPage({Key? key}) : super(key: key);
   @override
-  State<logpage> createState() => _logpageState();
+  State<LogPage> createState() => _LogPageState();
 }
 //
-class _logpageState extends State<logpage> {
+class _LogPageState extends State<LogPage> {
   var db = FirebaseFirestore.instance;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title:Text('再生した曲一覧')
+        title: const Text('再生した曲一覧')
       ),
       body: Column(
         children: [
-          Center(child: Text("星をタップして評価")),
+          const Center(child: Text("星をタップして評価")),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -39,7 +39,7 @@ class _logpageState extends State<logpage> {
 
 // Add a new document with a generated ID
                     db.collection("users").add(user).then((DocumentReference doc) =>
-                        print('DocumentSnapshot added with ID: ${doc.id}'));
+                        debugPrint('DocumentSnapshot added with ID: ${doc.id}'));
                     setState(() {
                       log[log.length] = {
                         'month':DateTime.now().month,

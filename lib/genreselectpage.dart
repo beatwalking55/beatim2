@@ -4,21 +4,21 @@ import 'variables.dart';
 import 'musicdata.dart';
 import 'dart:math';
 
-class genreselectpage extends StatefulWidget {
-  const genreselectpage({Key? key}) : super(key: key);
+class GenreSelectPage extends StatefulWidget {
+  const GenreSelectPage({Key? key}) : super(key: key);
 
   @override
-  State<genreselectpage> createState() => _genreselectpageState();
+  State<GenreSelectPage> createState() => _GenreSelectPageState();
 }
 
-class _genreselectpageState extends State<genreselectpage> {
+class _GenreSelectPageState extends State<GenreSelectPage> {
   final List genreList = List.generate(musics.length, (index) => musics[index]['genre1']).toSet().toList();
-  var random = new Random();
+  var random = Random();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("好きなジャンルを選択",style: TextStyle(fontWeight: FontWeight.bold),),
+        title: const Text("好きなジャンルを選択",style: TextStyle(fontWeight: FontWeight.bold),),
         backgroundColor: Colors.black,
       ),
       body: Container(
@@ -32,10 +32,10 @@ class _genreselectpageState extends State<genreselectpage> {
                   itemCount: genreList.length,
                   itemBuilder:(BuildContext context, int index){
                     return Container(
-                      decoration: BoxDecoration(
+                      decoration: const BoxDecoration(
                         color: Colors.black,
                         border:Border(
-                          bottom: const BorderSide(color: Colors.white30),//ボタンの下のみにボーダーラインを設定
+                          bottom: BorderSide(color: Colors.white30),//ボタンの下のみにボーダーラインを設定
                         ),
                       ),
                       child: Padding(
@@ -46,12 +46,12 @@ class _genreselectpageState extends State<genreselectpage> {
                             backgroundColor: Colors.black,//ボタンの背景色
                           ),
                           onPressed: (){
-                            Navigator.push(context,MaterialPageRoute(builder:(context) =>PlayPage()));
+                            Navigator.push(context,MaterialPageRoute(builder:(context) =>const PlayPage()));
                             setState(() {
                               genre = genreList[index];
                               artist = "free";
                           });
-                        }, child: Text(genreList[index],style: TextStyle(fontSize: 30, color: Colors.white),)
+                        }, child: Text(genreList[index],style: const TextStyle(fontSize: 30, color: Colors.white),)
                         ),
                       ),
                     );

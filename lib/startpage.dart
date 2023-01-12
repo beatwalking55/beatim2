@@ -1,28 +1,27 @@
 import 'package:beatim/artistselectpage.dart';
 import 'package:beatim/genreselectpage.dart';
-import 'package:beatim/musicselectfunction.dart';
 import 'package:flutter/material.dart';
 import 'variables.dart';
 import 'musicdata.dart';
 import 'playpage.dart';
 import 'dart:math';
 
-class startpage extends StatefulWidget {
-  const startpage({Key? key}) : super(key: key);
+class StartPage extends StatefulWidget {
+  const StartPage({Key? key}) : super(key: key);
 
   @override
-  State<startpage> createState() => _startpageState();
+  State<StartPage> createState() => _StartPageState();
 }
 
-class _startpageState extends State<startpage> {
+class _StartPageState extends State<StartPage> {
   final List genreList = List.generate(musics.length, (index) => musics[index]['genre1']).toSet().toList();
-  var random = new Random();
+  var random = Random();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("スタートページ",style: TextStyle(fontWeight: FontWeight.bold),),
+        title: const Text("Select Mode",style: TextStyle(fontWeight: FontWeight.bold),),
       ),
       body: Container(
         color: Colors.black,
@@ -43,14 +42,14 @@ class _startpageState extends State<startpage> {
                       genre = "free";
                       artist = "free";
                     });
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => PlayPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const PlayPage()));
                   },
-                  child: Text("おまかせ",style: TextStyle(fontSize: 30),)
+                  child: const Text("おまかせ",style: TextStyle(fontSize: 30),)
                   ),
               ),
 
               //中間にある隙間。
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
 
@@ -63,14 +62,14 @@ class _startpageState extends State<startpage> {
                     backgroundColor: Colors.black,//ボタンの背景色
                   ),
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => genreselectpage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const GenreSelectPage()));
                   },
-                  child: Text("ジャンルから選ぶ",style: TextStyle(fontSize: 30),)
+                  child: const Text("ジャンルから選ぶ",style: TextStyle(fontSize: 30),)
                   ),
               ),
 
               //中間にある隙間。
-              SizedBox(
+              const SizedBox(
                 height: 50,
               ),
 
@@ -83,9 +82,9 @@ class _startpageState extends State<startpage> {
                     backgroundColor: Colors.black,//ボタンの背景色
                   ),
                   onPressed: (){
-                    Navigator.push(context, MaterialPageRoute(builder: (context) => ArtistSelectPage()));
+                    Navigator.push(context, MaterialPageRoute(builder: (context) => const ArtistSelectPage()));
                   },
-                  child: Text("アーティストから選ぶ",style: TextStyle(fontSize: 30),)
+                  child: const Text("アーティストから選ぶ",style: TextStyle(fontSize: 30),)
                   ),
               ),
             ],

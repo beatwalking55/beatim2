@@ -3,30 +3,30 @@ import 'package:beatim/variables.dart';
 import 'package:flutter/material.dart';
 import 'musicdata.dart';
 
-class inputnamepage extends StatefulWidget {
-  const inputnamepage({Key? key}) : super(key: key);
+class InputNamePage extends StatefulWidget {
+  const InputNamePage({Key? key}) : super(key: key);
 
   @override
-  State<inputnamepage> createState() => _inputnamepageState();
+  State<InputNamePage> createState() => _InputNamePageState();
 }
 
-class _inputnamepageState extends State<inputnamepage> {
+class _InputNamePageState extends State<InputNamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("曲名とBPMを入力",
+        title: const Text("曲名とBPMを入力",
             style: TextStyle(
               color: Colors.black
           ),
         ),
-        iconTheme: IconThemeData(
+        iconTheme: const IconThemeData(
           color: Colors.black,
         ),
         backgroundColor: Colors.white,
       ),
-      body: Container(
-        child: Center(
+      body: 
+        Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -34,7 +34,7 @@ class _inputnamepageState extends State<inputnamepage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "曲名",
                   ),
                   onChanged:(text){
@@ -45,7 +45,7 @@ class _inputnamepageState extends State<inputnamepage> {
               Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: TextField(
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                     hintText: "BPM",
                   ),
                   onChanged:(text){
@@ -62,7 +62,7 @@ class _inputnamepageState extends State<inputnamepage> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.white,
-                    side: BorderSide(
+                    side: const BorderSide(
                       color: Colors.black,
                     )
                   ),
@@ -70,9 +70,9 @@ class _inputnamepageState extends State<inputnamepage> {
                       setState(() {
                         inputname(musicname);
                       });
-                      Navigator.push(context, MaterialPageRoute(builder:(context) => startpage()));
+                      Navigator.push(context, MaterialPageRoute(builder:(context) => const StartPage()));
                     },
-                    child: Text("次へ",
+                    child: const Text("次へ",
                       style: TextStyle(
                         color: Colors.black,
                         fontSize: 30
@@ -82,9 +82,7 @@ class _inputnamepageState extends State<inputnamepage> {
               )
             ],
           ),
-
         ),
-      ),
     );
   }
 }
