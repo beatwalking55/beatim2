@@ -8,6 +8,7 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:rxdart/rxdart.dart';
 import 'package:beatim/common.dart';
+import 'package:sensors_plus/sensors_plus.dart';
 
 class PlayPage extends StatefulWidget {
   const PlayPage({Key? key}) : super(key: key);
@@ -17,6 +18,12 @@ class PlayPage extends StatefulWidget {
 }
 
 class _PlayPageState extends State<PlayPage> {
+  int lapTime = 0, oldLapTime = 0, lapTimeLim = 100, nowTime = 0, oldTime = 0, interval = 0;
+  double dGyroPre = 0, dGyroNow = 0, gain = 0.84, acceleHurdol = 3, bpm = 0;
+  List<double> accele = [0];
+  List<double> acceleFiltered = [0,0];
+  List<int> intervals = List.filled(30, 0);
+  List<double> gyro = [0,0];
   @override
   void initState() {
     super.initState;
@@ -45,6 +52,76 @@ class _PlayPageState extends State<PlayPage> {
           break;
       }
     });
+    userAccelerometerEvents.listen((UserAccelerometerEvent event) {
+      setState(() {
+
+        acceleFiltered[1] = acceleFiltered[0];
+        accele[0] = pow((pow(event.x,2)+pow(event.y,2)),0.5).toDouble();
+
+        //RCローパスフィルタ
+        acceleFiltered[0] = gain*acceleFiltered[1] + (1-gain)*accele[0];
+      });
+    }); //get the sensor data and set then to the data types
+
+    gyroscopeEvents.listen(
+          (GyroscopeEvent event) {
+        setState(() {
+          gyro[1] = gyro[0];
+          gyro[0] = event.z;
+
+          oldTime = nowTime;
+          nowTime = DateTime.now().millisecondsSinceEpoch; //ストップウォッチ動かしてからの時間
+          // debugPrint((nowTime-oldTime).toString());
+          //加速度の帯域的な極大値見つける
+          if (gyro[0]*gyro[1] < 0  &&
+              acceleFiltered[0]> acceleHurdol &&
+              nowTime > (lapTime + lapTimeLim)) {
+            HapticFeedback.mediumImpact();
+            oldLapTime = lapTime;
+            lapTime = DateTime.now().millisecondsSinceEpoch;
+            intervals[counter] = lapTime - oldLapTime;
+            counter ++;
+            if (counter == intervals.length) {
+              HapticFeedback.vibrate();
+              setState(() {
+                calcBPMFromIntervals();
+                counter = 0;
+                debugPrint(bpm.toString());
+              });
+              setState(() {
+                playlist = musicselect(
+                    genre: genre,
+                    artist: artist,
+                    BPM: sensingBPM);
+                newplaylist = ConcatenatingAudioSource(
+                  children: List.generate(
+                      playlist.length,
+                          (inde) => AudioSource.uri(Uri.parse(
+                          musics[playlist[inde]]
+                          ['filename']))),
+                );
+              });
+              player.pause();
+              player.setLoopMode(LoopMode.all); //ループ再生on
+              player.setAudioSource(newplaylist,
+                  initialIndex: 0,
+                  initialPosition:
+                  Duration.zero); //index番目の曲をplayerにセット
+              player.play();
+              adjustSpeed();
+            }
+            debugPrint(interval.toString());
+          }
+        });
+      },
+    );
+  }
+  void calcBPMFromIntervals(){
+    double aveDul = (intervals.reduce((a, b) => a + b) -
+        intervals.reduce(max) -
+        intervals.reduce(min)) /
+        (intervals.length - 2);
+    sensingBPM = 60.0 / (aveDul / 1000);
   }
 
   //このコードがあると画面遷移時に音楽が止まる。
