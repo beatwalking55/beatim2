@@ -407,7 +407,7 @@ packages:
       name: sensors_plus
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.3"
+    version: "2.0.5"
   sensors_plus_platform_interface:
     dependency: transitive
     description:
